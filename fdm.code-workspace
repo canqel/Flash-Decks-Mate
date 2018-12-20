@@ -1,0 +1,30 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.fontSize": 13,
+		"workbench.iconTheme": "vscode-icons",
+		"editor.minimap.enabled": false,
+		"editor.tabSize": 4,
+		"html.format.wrapLineLength": 90,
+		"vsicons.projectDetection.disableDetect": true,
+		"explorer.confirmDelete": false,
+		"breadcrumbs.enabled": true,
+		"html.format.wrapAttributes": "aligned-multiple"
+	},
+	"extensions": {
+		"recommendations": [ 
+			"HookyQR.beautify", 
+			"christian-kohler.npm-intellisense",
+			"Mikael.Angular-BeastCode",
+			"eg2.tslint",
+			"ghaschel.vscode-angular-html",
+			"christian-kohler.path-intellisense",
+			"pranaygp.vscode-css-peek",
+			"robertohuertasm.vscode-icons"
+		]
+	}
+}
