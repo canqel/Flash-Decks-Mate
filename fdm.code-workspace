@@ -24,7 +24,8 @@
 			"ghaschel.vscode-angular-html",
 			"christian-kohler.path-intellisense",
 			"pranaygp.vscode-css-peek",
-			"robertohuertasm.vscode-icons"
+			"robertohuertasm.vscode-icons",
+			"1tontech.angular-material"
 		]
 	}
 }
