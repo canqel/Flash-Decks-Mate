@@ -1,0 +1,30 @@
+@import '../../../../styles/variables';
+
+.deck-container {
+  width: 100%;
+  // background-color: $gray-700;
+
+  .deck-header {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $primary-color-dark;
+    border-radius: 6px 6px 0 0;
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+
+      .col {
+        text-align: center;
+        flex-basis: 50%;
+      }
+    }
+
+    .add-button {
+      margin-bottom: 1rem;
+    }
+  }
+}
