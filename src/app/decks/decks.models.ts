@@ -8,6 +8,12 @@ export class FlashCard {
     this.example = new FlashCardEntry(side1Lang, side2Lang);
     this.clarification = new FlashCardEntry(side1Lang, side2Lang);
   }
+
+  replaceValues(anotherCard: FlashCard) {
+    this.word = anotherCard.word;
+    this.example = anotherCard.example;
+    this.clarification = anotherCard.clarification;
+  }
 }
 
 export class FlashCardEntry {

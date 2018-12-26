@@ -15,6 +15,12 @@ export class DeckEditorComponent {
   constructor() { }
 
   addCard() {
-    this.cards.push(new FlashCard(this.side1Lang, this.side2Lang));
+    this.cards.splice(0, 0, new FlashCard(this.side1Lang, this.side2Lang));
+  }
+
+  handleCardChange(card: FlashCard, index: number) {
+    console.log(index + ': cardChange handled');
+
+    this.cards[index].replaceValues(card);
   }
 }

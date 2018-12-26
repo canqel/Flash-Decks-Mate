@@ -1,0 +1,20 @@
+@import '../../../../styles/variables';
+
+form {
+  background-color: $primary-color;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+
+    .col {
+      flex-basis: 50%;
+      padding: 0 1.5rem;
+
+      .form-field {
+        width: 100%;
+
+      }
+    }
+  }
+}

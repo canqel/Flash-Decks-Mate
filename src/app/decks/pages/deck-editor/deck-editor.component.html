@@ -14,7 +14,12 @@
     </button>
   </div>
 
-  <div class="deck-body"></div>
+  <div class="deck-body">
+    <div class="card-editor-wrapper" *ngFor="let card of cards; let loopIndex=index">
+      <fdm-card-editor [card]="card" (cardChange)="handleCardChange($event, loopIndex)">
+      </fdm-card-editor>
+    </div>
+  </div>
 
   <div class="deck-footer"></div>
 </div>
