@@ -19,6 +19,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatInputModule
   ],
-  entryComponents: [DeckEditorComponent]
+  entryComponents: []
 })
 export class DecksModule { }
