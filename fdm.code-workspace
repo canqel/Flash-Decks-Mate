@@ -4,9 +4,8 @@
 			"path": "."
 		}
 	],
-	"settings": {
-		"editor.fontSize": 13,
-		"workbench.iconTheme": "vscode-icons",
+  "settings": {
+    "workbench.iconTheme": "vscode-icons",
 		"editor.minimap.enabled": false,
 		"editor.tabSize": 2,
 		"editor.detectIndentation": false,
@@ -14,7 +13,7 @@
 		"vsicons.projectDetection.disableDetect": true,
 		"explorer.confirmDelete": false,
 		"breadcrumbs.enabled": true,
-		"html.format.wrapAttributes": "aligned-multiple"
+    "html.format.wrapAttributes": "aligned-multiple"
 	},
 	"extensions": {
 		"recommendations": [ 

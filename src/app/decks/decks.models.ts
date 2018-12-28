@@ -1,3 +1,5 @@
+import { isNullOrWhitespace } from '../shared/string-utils';
+
 export class FlashCard {
   word: FlashCardEntry;
   example: FlashCardEntry;
@@ -23,6 +25,10 @@ export class FlashCardEntry {
   constructor(side1Lang: Language, side2Lang: Language) {
     this.side1 = { lang: side1Lang, value: '' };
     this.side2 = { lang: side2Lang, value: '' };
+  }
+
+  isEmpty(): boolean {
+    return isNullOrWhitespace(this.side1.value) && isNullOrWhitespace(this.side2.value);
   }
 }
 
