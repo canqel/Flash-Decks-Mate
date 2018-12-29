@@ -26,20 +26,16 @@ export class DeckExporterService {
   private createOutputForCard(card: FlashCard): string {
     const wordEntry = this.createOutputForCardEntry(card.word);
     const exampleEntry = this.createOutputForCardEntry(card.example);
-    const clarificationEntry = this.createOutputForCardEntry(card.clarification, false);
+    const clarificationEntry = this.createOutputForCardEntry(card.clarification);
 
     return `${wordEntry}${exampleEntry}${clarificationEntry}`;
   }
 
-  private createOutputForCardEntry(entry: FlashCardEntry, addSeparator = true): string {
-    if (entry.isEmpty()) return '';
+  private createOutputForCardEntry(entry: FlashCardEntry): string {
+    const value1 = entry.side1.value.trim();
+    const value2 = entry.side2.value.trim();
+    const separator = DeckExporterConstants.cardElementSeparator;
 
-    const value1 = entry.side1.value;
-    const value2 = entry.side2.value;
-
-    let result = `${value1}${DeckExporterConstants.cardElementSeparator}${value2}`;
-    if (addSeparator) result += DeckExporterConstants.cardElementSeparator;
-
-    return result;
+    return `${value1}${separator}${value2}${separator}`;
   }
 }

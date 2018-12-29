@@ -14,55 +14,92 @@ describe('DeckExporterService', () => {
   });
 
   it('#export() should return valid result when there is 1 card, only with word', () => {
-    const testCase1 = new TestCase1();
-    const result = service.export(testCase1.cards);
-
-    expect(result).toEqual(testCase1.expectedOutput);
+    executeTestCase(service, new TestCase1());
   });
 
   it('#export() should return valid result when there is 1 card', () => {
-    const testCase2 = new TestCase2();
-    const result = service.export(testCase2.cards);
-
-    expect(result).toEqual(testCase2.expectedOutput);
+    executeTestCase(service, new TestCase2());
   });
 
-  // TODO: What about entry with one empty side?
+  it('#export() should return valid result when card contains empty value on one side of word, example and clarification', () => {
+    executeTestCase(service, new TestCase3());
+  });
+
+  it('#export() should return valid result when card contains word and clarification', () => {
+    executeTestCase(service, new TestCase4());
+  });
+
+  it('#export() should return valid result when card values contain whitespaces', () => {
+    executeTestCase(service, new TestCase5());
+  });
 
 });
 
-// 1 card, only with word
-class TestCase1 {
-  private readonly wordSide1 = 'Word1 Test';
-  private readonly wordSide2 = 'Word2 Test';
+function executeTestCase(service: DeckExporterService, testCase: TestCase) {
+  const result = service.export(testCase.cards);
 
-  private readonly s = DeckExporterConstants.cardElementSeparator;
+  expect(result).toEqual(testCase.expectedOutput);
+}
+
+interface TestCase {
+  cards: FlashCard[];
+  expectedOutput: string;
+}
+
+// 1 card, only with word
+class TestCase1 implements TestCase {
+  protected readonly wordSide1 = 'Word1 Test';
+  protected readonly wordSide2 = 'Word2 Test';
+
+  protected readonly s = DeckExporterConstants.cardElementSeparator;
 
   cards = [
     createFlashCard(this.wordSide1, this.wordSide2)
   ];
 
-  expectedOutput = `${this.wordSide1}${this.s}${this.wordSide2}${this.s}`;
+  expectedOutput = `${this.wordSide1}${this.s}${this.wordSide2}${this.s}${this.s}${this.s}${this.s}${this.s}`;
 }
 
 // 1 card with word, example and clarification
-// TODO: inherit
-class TestCase2 {
-  private readonly wordSide1 = 'Word1 Test';
-  private readonly wordSide2 = 'Word2 Test';
-  private readonly exampleSide1 = 'example1 Test';
-  private readonly exampleSide2 = 'example2 Test';
-  private readonly clarificationSide1 = 'clarification1 Test';
-  private readonly clarificationSide2 = 'clarification2 Test';
-
-  private readonly s = DeckExporterConstants.cardElementSeparator;
+class TestCase2 extends TestCase1 {
+  protected readonly exampleSide1 = 'example1 Test';
+  protected readonly exampleSide2 = 'example2 Test';
+  protected readonly clarificationSide1 = 'clarification1 Test';
+  protected readonly clarificationSide2 = 'clarification2 Test';
 
   cards = [
     createFlashCard(this.wordSide1, this.wordSide2, this.exampleSide1, this.exampleSide2,
       this.clarificationSide1, this.clarificationSide2)
   ];
 
-  expectedOutput = `${this.wordSide1}${this.s}${this.wordSide2}${this.s}${this.exampleSide1}${this.s}${this.exampleSide2}${this.s}${this.clarificationSide1}${this.s}${this.clarificationSide2}`;
+  expectedOutput = `${this.wordSide1}${this.s}${this.wordSide2}${this.s}${this.exampleSide1}${this.s}${this.exampleSide2}${this.s}${this.clarificationSide1}${this.s}${this.clarificationSide2}${this.s}`;
+}
+
+// 1 card with empty value on one side of word, example and clarification
+class TestCase3 extends TestCase2 {
+  cards = [
+    createFlashCard(this.wordSide1, '', '', this.exampleSide2, this.clarificationSide1, '')
+  ]
+
+  expectedOutput = `${this.wordSide1}${this.s}${this.s}${this.s}${this.exampleSide2}${this.s}${this.clarificationSide1}${this.s}${this.s}`;
+}
+
+// 1 card with word and clarification
+class TestCase4 extends TestCase2 {
+  cards = [
+    createFlashCard(this.wordSide1, this.wordSide2, '', '', this.clarificationSide1, this.clarificationSide2)
+  ]
+
+  expectedOutput = `${this.wordSide1}${this.s}${this.wordSide2}${this.s}${this.s}${this.s}${this.clarificationSide1}${this.s}${this.clarificationSide2}${this.s}`;
+}
+
+// 1 card with whitespaces
+class TestCase5 extends TestCase2 {
+  cards = [
+    createFlashCard(this.wordSide1 + '  ', '  ' + this.wordSide2, '  ', '  ', '     ', ' ')
+  ]
+
+  expectedOutput = `${this.wordSide1}${this.s}${this.wordSide2}${this.s}${this.s}${this.s}${this.s}${this.s}`;
 }
 
 function createFlashCard(word1: string, word2: string,
