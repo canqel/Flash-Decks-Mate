@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { FlashCard, FlashCardEntry } from '../decks.models';
 
 export const DeckExporterConstants = {
-  cardElementSeparator: ';'
+  cardElementSeparator: ';',
+  cardSeparator: '\n'
 };
 
 @Injectable({
@@ -16,9 +17,11 @@ export class DeckExporterService {
     if (!cards || cards.length === 0) return '';
 
     let result = '';
-    cards.forEach(loopCard => {
-      result += this.createOutputForCard(loopCard);
-    });
+    for (let loopIndex = 0; loopIndex < cards.length; loopIndex++) {
+      result += this.createOutputForCard(cards[loopIndex]);
+
+      if (loopIndex + 1 !== cards.length) result += DeckExporterConstants.cardSeparator;
+    }
 
     return result;
   }

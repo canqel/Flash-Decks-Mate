@@ -33,6 +33,10 @@ describe('DeckExporterService', () => {
     executeTestCase(service, new TestCase5());
   });
 
+  it('#export() should return valid result when there are 3 cards', () => {
+    executeTestCase(service, new TestCase6());
+  });
+
 });
 
 function executeTestCase(service: DeckExporterService, testCase: TestCase) {
@@ -100,6 +104,27 @@ class TestCase5 extends TestCase2 {
   ]
 
   expectedOutput = `${this.wordSide1}${this.s}${this.wordSide2}${this.s}${this.s}${this.s}${this.s}${this.s}`;
+}
+
+// 3 cards
+class TestCase6 extends TestCase1 {
+  private readonly card2Word1 = "Card2Word1";
+  private readonly card2Word2 = "Card2Word2";
+  private readonly card3Word1 = "Card3Word1";
+  private readonly card3Word2 = "Card3Word2";
+
+  private readonly cardSep = DeckExporterConstants.cardSeparator;
+  private readonly card1Output = `${this.wordSide1}${this.s}${this.wordSide2}${this.s}${this.s}${this.s}${this.s}${this.s}`;
+  private readonly card2Output = `${this.card2Word1}${this.s}${this.card2Word2}${this.s}${this.s}${this.s}${this.s}${this.s}`;
+  private readonly card3Output = `${this.card3Word1}${this.s}${this.card3Word2}${this.s}${this.s}${this.s}${this.s}${this.s}`;
+
+  cards = [
+    createFlashCard(this.wordSide1, this.wordSide2),
+    createFlashCard(this.card2Word1, this.card2Word2),
+    createFlashCard(this.card3Word1, this.card3Word2)
+  ];
+
+  expectedOutput = `${this.card1Output}${this.cardSep}${this.card2Output}${this.cardSep}${this.card3Output}`;
 }
 
 function createFlashCard(word1: string, word2: string,
