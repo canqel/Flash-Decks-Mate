@@ -65,12 +65,9 @@ export class CardEditorComponent implements OnDestroy {
 
   private createCard(): FlashCard {
     const card = new FlashCard(this.side1Lang, this.side2Lang);
-    card.word.side1.value = this.word1Control.value;
-    card.word.side2.value = this.word2Control.value;
-    card.example.side1.value = this.example1Control.value;
-    card.example.side2.value = this.example2Control.value;
-    card.clarification.side1.value = this.clarification1Control.value;
-    card.clarification.side2.value = this.clarification2Control.value;
+    card.word.setValues(this.word1Control.value, this.word2Control.value);
+    card.example.setValues(this.example1Control.value, this.example2Control.value);
+    card.clarification.setValues(this.clarification1Control.value, this.clarification2Control.value);
 
     return card;
   }

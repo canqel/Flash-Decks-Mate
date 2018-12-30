@@ -30,6 +30,11 @@ export class FlashCardEntry {
   isEmpty(): boolean {
     return isNullOrWhitespace(this.side1.value) && isNullOrWhitespace(this.side2.value);
   }
+
+  setValues(side1: string, side2: string) {
+    this.side1.value = side1;
+    this.side2.value = side2;
+  }
 }
 
 export interface LocalizedString {
