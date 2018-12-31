@@ -7,18 +7,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { CardEditorComponent } from './components/card-editor/card-editor.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeckExportDialogComponent } from './components/deck-export-dialog/deck-export-dialog.component';
 
 @NgModule({
-  declarations: [DeckEditorComponent, CardEditorComponent],
+  declarations: [DeckEditorComponent, CardEditorComponent, DeckExportDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     DecksRoutingModule,
     MatButtonModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
-  entryComponents: []
+  entryComponents: [DeckExportDialogComponent]
 })
 export class DecksModule { }
