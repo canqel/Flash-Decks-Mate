@@ -1,10 +1,10 @@
 <h1 mat-dialog-title>Deck output</h1>
 
 <div mat-dialog-content>
-  <textarea class="output-field" rows="4" readonly>{{output}}</textarea>
+  <textarea #textArea class="output-field" rows="12" readonly>{{output}}</textarea>
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Copy to clipboard</button>
+<div mat-dialog-actions align="end">
+  <button mat-button color="accent" (click)="copyToClipboard()">Copy to clipboard</button>
   <button mat-button mat-dialog-close>Close</button>
 </div>

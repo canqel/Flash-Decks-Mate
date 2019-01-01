@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -8,13 +8,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DeckExportDialogComponent {
 
+  @ViewChild('textArea') textArea: ElementRef;
+
   constructor(
     public dialogRef: MatDialogRef<DeckExportDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public output: string) {
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  copyToClipboard(): void {
+    this.textArea.nativeElement.select();
+    document.execCommand("copy");
   }
 
 }

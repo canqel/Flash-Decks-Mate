@@ -39,13 +39,9 @@ export class DeckEditorComponent {
   }
 
   private openExportDialog(output: string): void {
-    const dialogRef = this.dialog.open(DeckExportDialogComponent, {
-      width: '500px',
+    this.dialog.open(DeckExportDialogComponent, {
+      width: '700px',
       data: output
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 }
