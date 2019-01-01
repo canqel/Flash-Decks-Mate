@@ -16,10 +16,17 @@ export class CardEditorComponent implements OnDestroy {
     this.initForm(newValue);
   }
 
+  @Input() set index(newValue: number) {
+    this.baseTabIndex = newValue * 10;
+  }
+
   @Output() cardChange = new EventEmitter<FlashCard>();
 
   isInEditMode = true;
   form: FormGroup;
+  baseTabIndex: number;
+  showExample = false;
+  showClarification = false;
 
   private subscription: Subscription;
   private side1Lang: Language;

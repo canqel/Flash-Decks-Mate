@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeckExportDialogComponent } from './components/deck-export-dialog/deck-export-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [DeckEditorComponent, CardEditorComponent, DeckExportDialogComponent],
@@ -19,7 +21,8 @@ import { DeckExportDialogComponent } from './components/deck-export-dialog/deck-
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   entryComponents: [DeckExportDialogComponent]
 })

@@ -3,46 +3,51 @@
     <div class="col">
       <mat-form-field appearance="standard" color="accent" class="form-field">
         <mat-label>Word</mat-label>
-        <input matInput formControlName="word1">
+        <input matInput formControlName="word1" [attr.tabindex]="baseTabIndex + 1">
       </mat-form-field>
+
+      <mat-form-field *ngIf="showExample" appearance="standard" color="accent" class="form-field">
+        <mat-label>Example</mat-label>
+        <input matInput formControlName="example1" [attr.tabindex]="baseTabIndex + 3">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="showClarification" appearance="standard" color="accent" class="form-field">
+        <mat-label>Clarification</mat-label>
+        <input matInput formControlName="clarification1" [attr.tabindex]="baseTabIndex + 5">
+      </mat-form-field>
+    </div>
+
+    <div class="mid-col">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngIf="!showExample" (click)="showExample = true">
+          <mat-icon>add</mat-icon>
+          <span>Add example</span>
+        </button>
+        <button mat-menu-item *ngIf="!showClarification" (click)="showClarification = true">
+          <mat-icon>add</mat-icon>
+          <span>Add clarification</span>
+        </button>
+      </mat-menu>
     </div>
 
     <div class="col">
       <mat-form-field appearance="standard" color="accent" class="form-field">
         <mat-label>Word</mat-label>
-        <input matInput formControlName="word2">
+        <input matInput formControlName="word2" [attr.tabindex]="baseTabIndex + 2">
       </mat-form-field>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <mat-form-field appearance="standard" color="accent" class="form-field">
+      <mat-form-field *ngIf="showExample" appearance="standard" color="accent" class="form-field">
         <mat-label>Example</mat-label>
-        <input matInput formControlName="example1">
+        <input matInput formControlName="example2" [attr.tabindex]="baseTabIndex + 4">
       </mat-form-field>
-    </div>
 
-    <div class="col">
-      <mat-form-field appearance="standard" color="accent" class="form-field">
-        <mat-label>Example</mat-label>
-        <input matInput formControlName="example2">
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <mat-form-field appearance="standard" color="accent" class="form-field">
+      <mat-form-field *ngIf="showClarification" appearance="standard" color="accent" class="form-field">
         <mat-label>Clarification</mat-label>
-        <input matInput formControlName="clarification1">
-      </mat-form-field>
-    </div>
-
-    <div class="col">
-      <mat-form-field appearance="standard" color="accent" class="form-field">
-        <mat-label>Clarification</mat-label>
-        <input matInput formControlName="clarification2">
+        <input matInput formControlName="clarification2" [attr.tabindex]="baseTabIndex + 6">
       </mat-form-field>
     </div>
   </div>
