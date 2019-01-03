@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnDestroy, ViewChild } from '@angular/core';
 import { FlashCard, Language } from '../../decks.models';
 import { FormControl, FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';

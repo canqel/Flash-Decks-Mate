@@ -10,10 +10,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeckExportDialogComponent } from './components/deck-export-dialog/deck-export-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { CardEditorInputComponent } from './components/card-editor-input/card-editor-input.component';
 
 
 @NgModule({
-  declarations: [DeckEditorComponent, CardEditorComponent, DeckExportDialogComponent],
+  declarations: [DeckEditorComponent, CardEditorComponent, DeckExportDialogComponent, CardEditorInputComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

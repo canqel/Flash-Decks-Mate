@@ -1,31 +1,30 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
+  "folders": [{
+    "path": "."
+  }],
   "settings": {
     "workbench.iconTheme": "vscode-icons",
-		"editor.minimap.enabled": false,
-		"editor.tabSize": 2,
-		"editor.detectIndentation": false,
-		"html.format.wrapLineLength": 90,
-		"vsicons.projectDetection.disableDetect": true,
-		"explorer.confirmDelete": false,
-		"breadcrumbs.enabled": true,
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "html.format.wrapLineLength": 90,
+    "vsicons.projectDetection.disableDetect": true,
+    "explorer.confirmDelete": false,
+    "breadcrumbs.enabled": true,
     "html.format.wrapAttributes": "aligned-multiple"
-	},
-	"extensions": {
-		"recommendations": [ 
-			"HookyQR.beautify", 
-			"christian-kohler.npm-intellisense",
-			"Mikael.Angular-BeastCode",
-			"eg2.tslint",
-			"ghaschel.vscode-angular-html",
-			"christian-kohler.path-intellisense",
-			"pranaygp.vscode-css-peek",
-			"robertohuertasm.vscode-icons",
-			"1tontech.angular-material"
-		]
-	}
+  },
+  "extensions": {
+    "recommendations": [
+      "HookyQR.beautify",
+      "christian-kohler.npm-intellisense",
+      "Mikael.Angular-BeastCode",
+      "eg2.tslint",
+      "ghaschel.vscode-angular-html",
+      "christian-kohler.path-intellisense",
+      "pranaygp.vscode-css-peek",
+      "robertohuertasm.vscode-icons",
+      "1tontech.angular-material",
+      "mrmlnc.vscode-scss"
+    ]
+  }
 }

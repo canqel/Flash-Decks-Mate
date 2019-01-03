@@ -1,20 +1,17 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col">
-      <mat-form-field appearance="standard" color="accent" class="form-field">
-        <mat-label>Word</mat-label>
+      <fdm-card-editor-input label="Word">
         <input matInput formControlName="word1" [attr.tabindex]="baseTabIndex + 1">
-      </mat-form-field>
+      </fdm-card-editor-input>
 
-      <mat-form-field *ngIf="showExample" appearance="standard" color="accent" class="form-field">
-        <mat-label>Example</mat-label>
+      <fdm-card-editor-input *ngIf="showExample" label="Example">
         <input matInput formControlName="example1" [attr.tabindex]="baseTabIndex + 3">
-      </mat-form-field>
+      </fdm-card-editor-input>
 
-      <mat-form-field *ngIf="showClarification" appearance="standard" color="accent" class="form-field">
-        <mat-label>Clarification</mat-label>
+      <fdm-card-editor-input *ngIf="showClarification" label="Clarification">
         <input matInput formControlName="clarification1" [attr.tabindex]="baseTabIndex + 5">
-      </mat-form-field>
+      </fdm-card-editor-input>
     </div>
 
     <div class="mid-col">
@@ -35,20 +32,17 @@
     </div>
 
     <div class="col">
-      <mat-form-field appearance="standard" color="accent" class="form-field">
-        <mat-label>Word</mat-label>
+      <fdm-card-editor-input label="Word">
         <input matInput formControlName="word2" [attr.tabindex]="baseTabIndex + 2">
-      </mat-form-field>
+      </fdm-card-editor-input>
 
-      <mat-form-field *ngIf="showExample" appearance="standard" color="accent" class="form-field">
-        <mat-label>Example</mat-label>
+      <fdm-card-editor-input *ngIf="showExample" label="Example">
         <input matInput formControlName="example2" [attr.tabindex]="baseTabIndex + 4">
-      </mat-form-field>
+      </fdm-card-editor-input>
 
-      <mat-form-field *ngIf="showClarification" appearance="standard" color="accent" class="form-field">
-        <mat-label>Clarification</mat-label>
+      <fdm-card-editor-input *ngIf="showClarification" label="Clarification">
         <input matInput formControlName="clarification2" [attr.tabindex]="baseTabIndex + 6">
-      </mat-form-field>
+      </fdm-card-editor-input>
     </div>
   </div>
 </form>
