@@ -1,15 +1,15 @@
-<mat-form-field appearance="fill" color="accent" class="form-field" (contextmenu)="onContextMenu($event, 'word1')">
+<mat-form-field appearance="fill" color="accent" class="form-field" (contextmenu)="onContextMenu($event)">
   <mat-label>{{label}}</mat-label>
   <ng-content></ng-content>
-  <div style="position: fixed" [style.left]="contextMenuPosition.x" [style.top]="contextMenuPosition.y"
-       [matMenuTriggerFor]="contextMenu" [matMenuTriggerData]="{item: 'word1'}">
+  <div class="context-menu-trigger" [style.left]="contextMenuPosition.x" [style.top]="contextMenuPosition.y"
+       [matMenuTriggerFor]="contextMenu">
   </div>
 </mat-form-field>
 
 <!-- TODO: It's probably not needed to create separate menu for each input -->
 <mat-menu #contextMenu="matMenu">
-  <ng-template matMenuContent let-item="item">
-    <button mat-menu-item (click)="onContextMenuAction1(item)">Action 1</button>
-    <button mat-menu-item (click)="onContextMenuAction2(item)">Action 2</button>
+  <ng-template matMenuContent>
+    <button mat-menu-item (click)="openInDiki()">Look up in Diki.pl</button>
+    <button mat-menu-item (click)="openInGoogleTranslate()">Look up in Google Translate</button>
   </ng-template>
 </mat-menu>
