@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <fdm-card-editor-input label="Word">
-        <input matInput formControlName="word1" [attr.tabindex]="baseTabIndex + 1">
+        <input matInput formControlName="word1" (blur)="onBlur()" (focus)="onFocus()" [attr.tabindex]="baseTabIndex + 1">
       </fdm-card-editor-input>
 
       <fdm-card-editor-input *ngIf="showExample" label="Example">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'fdm-root',
@@ -13,4 +13,11 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class AppComponent {
+
+  @HostListener('document:keydown', ['$event'])
+  onKeydownHandler(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      // Do things
+    }
+  }
 }

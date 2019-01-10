@@ -45,6 +45,14 @@ export class CardEditorComponent implements OnDestroy {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
+  onFocus() {
+    console.log('onFocus');
+  }
+
+  onBlur() {
+    console.log('onBlur');
+  }
+
   private initForm(card: FlashCard) {
     console.log('form init');
     this.word1Control = new FormControl(card.word.side1.value);
