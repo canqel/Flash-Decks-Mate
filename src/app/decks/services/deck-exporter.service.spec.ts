@@ -1,6 +1,7 @@
-import { DeckExporterService, DeckExporterConstants } from "./deck-exporter.service";
+import { DeckExporterService, DeckExporterConstants } from './deck-exporter.service';
 import { FlashCard, Language } from '../decks.models';
 
+/* tslint:disable */
 describe('DeckExporterService', () => {
   let service: DeckExporterService;
   beforeEach(() => { service = new DeckExporterService(); });
@@ -39,7 +40,7 @@ describe('DeckExporterService', () => {
 
 });
 
-function executeTestCase(service: DeckExporterService, testCase: TestCase) {
+function executeTestCase(service: DeckExporterService, testCase: TestCase): void {
   const result = service.export(testCase.cards);
 
   expect(result).toEqual(testCase.expectedOutput);

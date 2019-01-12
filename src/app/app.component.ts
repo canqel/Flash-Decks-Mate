@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   @HostListener('document:keydown', ['$event'])
-  onKeydownHandler(event: KeyboardEvent) {
+  onKeydownHandler(event: KeyboardEvent): void {
     this.keydownEvents.next(event);
   }
 }

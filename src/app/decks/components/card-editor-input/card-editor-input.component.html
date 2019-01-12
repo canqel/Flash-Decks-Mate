@@ -1,5 +1,5 @@
 <mat-form-field appearance="fill" color="accent" class="form-field" (contextmenu)="onContextMenu($event)">
-  <mat-label>{{label}}</mat-label>
+  <mat-label>{{ label }}</mat-label>
   <ng-content></ng-content>
   <div class="context-menu-trigger" [style.left]="contextMenuPosition.x" [style.top]="contextMenuPosition.y"
        [matMenuTriggerFor]="contextMenu">

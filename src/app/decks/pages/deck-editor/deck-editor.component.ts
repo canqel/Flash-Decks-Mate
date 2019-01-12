@@ -23,17 +23,15 @@ export class DeckEditorComponent {
     this.cards = [card];
   }
 
-  addCard() {
+  addCard(): void {
     this.cards.splice(0, 0, new FlashCard(this.side1Lang, this.side2Lang));
   }
 
-  handleCardChange(card: FlashCard, index: number) {
-    console.log(index + ': cardChange handled');
-
+  handleCardChange(card: FlashCard, index: number): void {
     this.cards[index].replaceValues(card);
   }
 
-  export() {
+  export(): void {
     const output = this.deckExporter.export(this.cards);
     this.openExportDialog(output);
   }

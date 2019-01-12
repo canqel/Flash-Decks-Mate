@@ -17,7 +17,7 @@ export class DeckExportDialogComponent {
 
   copyToClipboard(): void {
     this.textArea.nativeElement.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
   }
 
 }

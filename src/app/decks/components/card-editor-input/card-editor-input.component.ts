@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, OnInit, ViewChild, ContentCh
 import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { DictionariesService } from '../../services/dictionaries.service';
-import { map, distinctUntilChanged, tap } from 'rxjs/operators';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 import { KeyboardShortcut, ShortcutsService } from 'src/app/core/services/shortcuts.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 
@@ -58,29 +58,29 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
-  onContextMenu(event: MouseEvent) {
+  onContextMenu(event: MouseEvent): void {
     event.preventDefault();
     this.contextMenuPosition = new Position(event.clientX, event.clientY);
     this.contextMenu.openMenu();
   }
 
-  openInDiki() {
+  openInDiki(): void {
     const url = this.dictionariesService.generateUrlForDiki(this.fieldControl.value);
     this.open(url);
   }
 
-  openInGoogleTranslate() {
+  openInGoogleTranslate(): void {
     const url = this.dictionariesService.generateUrlForGoogleTranslate(this.fieldControl.value);
     this.open(url);
   }
 
-  private open(url: string) {
+  private open(url: string): void {
     if (url == null) return;
 
     window.open(url, '_blank');
   }
 
-  private handleFocusChanged(isFocused: boolean) {
+  private handleFocusChanged(isFocused: boolean): void {
     this.contextMenuPosition = this.getDefaultPosition(this.field._elementRef);
 
     if (isFocused) {

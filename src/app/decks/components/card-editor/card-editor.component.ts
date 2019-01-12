@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FlashCard, Language } from '../../decks.models';
 import { FormControl, FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
@@ -45,8 +45,7 @@ export class CardEditorComponent implements OnDestroy {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
-  private initForm(card: FlashCard) {
-    console.log('form init');
+  private initForm(card: FlashCard): void {
     this.word1Control = new FormControl(card.word.side1.value);
     this.word2Control = new FormControl(card.word.side2.value);
     this.example1Control = new FormControl(card.example.side1.value);

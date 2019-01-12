@@ -18,7 +18,7 @@
         "singleline": "never"
       }
     ],
-    "rx-subject-restrictions": true,
+    "rx-subject-restrictions": false,
     "no-unused": true,
     "no-return-undefined": true,
     "no-unnecessary-else": true,
@@ -32,14 +32,13 @@
     "typedef": [
       true,
       "call-signature",
-      "parameter",
       "property-declaration"
     ],
     "comment-format": [
       true,
       "check-space"
     ],
-    "curly": true,
+    "curly": false,
     "eofline": true,
     "forin": true,
     "import-blacklist": [
@@ -64,7 +63,7 @@
     "interface-name": false,
     "label-position": true,
     "origin-ordered-imports": [
-      true,
+      false,
       "one-blank-line"
     ],
     "max-line-length": [
@@ -142,7 +141,8 @@
       "always"
     ],
     "triple-equals": [
-      true
+      true,
+      "allow-null-check"
     ],
     "typedef-whitespace": [
       true,
@@ -175,13 +175,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "$your-selector$",
+      "fdm",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "$your-selector$",
+      "fdm",
       "kebab-case"
     ],
     "use-input-property-decorator": true,

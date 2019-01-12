@@ -12,7 +12,6 @@ import { DeckExportDialogComponent } from './components/deck-export-dialog/deck-
 import { MatMenuModule } from '@angular/material/menu';
 import { CardEditorInputComponent } from './components/card-editor-input/card-editor-input.component';
 
-
 @NgModule({
   declarations: [DeckEditorComponent, CardEditorComponent, DeckExportDialogComponent, CardEditorInputComponent],
   imports: [

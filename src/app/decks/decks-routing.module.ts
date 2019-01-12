@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DeckEditorComponent } from './pages/deck-editor/deck-editor.component';
 
 const routes: Routes = [
-  { path: 'decks', component: DeckEditorComponent },
+  { path: 'decks', component: DeckEditorComponent }
 ];
 
 @NgModule({

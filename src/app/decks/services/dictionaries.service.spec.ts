@@ -1,4 +1,4 @@
-import { DictionariesService } from "./dictionaries.service";
+import { DictionariesService } from './dictionaries.service';
 
 describe('DeckExporterService', () => {
   let service: DictionariesService;
