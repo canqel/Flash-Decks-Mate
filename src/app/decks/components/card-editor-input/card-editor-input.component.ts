@@ -5,6 +5,8 @@ import { DictionariesService } from '../../services/dictionaries.service';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 import { KeyboardShortcut, ShortcutsService } from 'src/app/core/services/shortcuts.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { MatInput } from '@angular/material/input';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 class Position {
   x: string;
@@ -13,6 +15,24 @@ class Position {
   constructor(xValue: number, yValue: number) {
     this.x = xValue + 'px';
     this.y = yValue + 'px';
+  }
+}
+
+class Char {
+  value = new BehaviorSubject<string>('');
+  private isLowercase = true;
+
+  constructor(private lowercase: string, private uppercase: string) {
+    this.updateValue();
+  }
+
+  switchCase(): void {
+    this.isLowercase = !this.isLowercase;
+    this.updateValue();
+  }
+
+  private updateValue(): void {
+    this.value.next(this.isLowercase ? this.lowercase : this.uppercase);
   }
 }
 
@@ -26,19 +46,30 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   @Input() label: string;
 
   @ContentChild(MatFormFieldControl) fieldControl: MatFormFieldControl<any>;
+  @ContentChild(MatInput) input: MatInput;
   @ViewChild(MatFormField) field: MatFormField;
-  @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
+  @ViewChild('contextMenuTrigger') contextMenuTrigger: MatMenuTrigger;
+  @ViewChild('germanCharsMenuTrigger') germanCharsMenuTrigger: MatMenuTrigger;
 
-  contextMenuPosition = new Position(0, 0);
+  menuPosition = new Position(0, 0);
+
+  aUmlaut = new Char('ä', 'Ä');
+  oUmlaut = new Char('ö', 'Ö');
+  uUmlaut = new Char('ü', 'Ü');
+  eszett = new Char('ß', 'ẞ');
 
   private showContextMenuShortcut: KeyboardShortcut;
+  private showGermanCharsMenuShortcut: KeyboardShortcut;
+  private switchGermanCharsCaseShortcut: KeyboardShortcut;
   private subscription: Subscription;
 
   constructor(private dictionariesService: DictionariesService,
     private shortcutsService: ShortcutsService) {
 
     const spaceKey = ' ';
-    this.showContextMenuShortcut = new KeyboardShortcut(spaceKey, () => this.contextMenu.openMenu(), true);
+    this.showContextMenuShortcut = new KeyboardShortcut(spaceKey, () => this.contextMenuTrigger.openMenu(), true);
+    this.showGermanCharsMenuShortcut = new KeyboardShortcut('q', () => this.germanCharsMenuTrigger.openMenu(), true);
+    this.switchGermanCharsCaseShortcut = new KeyboardShortcut('q', () => this.switchGermanCharsCase());
   }
 
   ngOnInit(): void {
@@ -52,6 +83,14 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
 
     this.subscription = focusedChanges
       .subscribe(value => this.handleFocusChanged(value));
+
+    const subscription2 = this.germanCharsMenuTrigger.menuOpened
+      .subscribe(() => this.shortcutsService.register(this.switchGermanCharsCaseShortcut));
+    const subscription3 = this.germanCharsMenuTrigger.menuClosed
+      .subscribe(() => this.shortcutsService.unregister(this.switchGermanCharsCaseShortcut));
+
+    this.subscription.add(subscription2);
+    this.subscription.add(subscription3);
   }
 
   ngOnDestroy(): void {
@@ -60,8 +99,8 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
 
   onContextMenu(event: MouseEvent): void {
     event.preventDefault();
-    this.contextMenuPosition = new Position(event.clientX, event.clientY);
-    this.contextMenu.openMenu();
+    this.menuPosition = new Position(event.clientX, event.clientY);
+    this.contextMenuTrigger.openMenu();
   }
 
   openInDiki(): void {
@@ -74,6 +113,11 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
     this.open(url);
   }
 
+  addCharacter(character: string): void {
+    this.input.value = this.input.value + character;
+    this.input.focus();
+  }
+
   private open(url: string): void {
     if (url == null) return;
 
@@ -81,12 +125,13 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   }
 
   private handleFocusChanged(isFocused: boolean): void {
-    this.contextMenuPosition = this.getDefaultPosition(this.field._elementRef);
+    this.menuPosition = this.getDefaultPosition(this.field._elementRef);
+    const shortcuts = [this.showContextMenuShortcut, this.showGermanCharsMenuShortcut];
 
     if (isFocused) {
-      this.shortcutsService.register(this.showContextMenuShortcut);
+      this.shortcutsService.register(...shortcuts);
     } else {
-      this.shortcutsService.unregister(this.showContextMenuShortcut);
+      this.shortcutsService.unregister(...shortcuts);
     }
   }
 
@@ -94,5 +139,12 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
     const rect = elementRef.nativeElement.getBoundingClientRect();
 
     return new Position(rect.left, rect.bottom - 15);
+  }
+
+  private switchGermanCharsCase(): void {
+    this.aUmlaut.switchCase();
+    this.oUmlaut.switchCase();
+    this.uUmlaut.switchCase();
+    this.eszett.switchCase();
   }
 }

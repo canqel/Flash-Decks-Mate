@@ -24,20 +24,24 @@ export class ShortcutsService {
     keydownEvents.subscribe(event => this.handleKeyDown(event));
   }
 
-  register(shortcut: KeyboardShortcut): void {
-    this.shortcuts.push(shortcut);
+  register(...shortcuts: KeyboardShortcut[]): void {
+    shortcuts.forEach(loopShortcut => {
+      this.shortcuts.push(loopShortcut);
+    });
   }
 
-  unregister(shortcut: KeyboardShortcut): void {
-    const index = this.shortcuts.findIndex(item => item === shortcut);
-    if (index >= 0) this.shortcuts.splice(index, 1);
+  unregister(...shortcuts: KeyboardShortcut[]): void {
+    shortcuts.forEach(loopShortcut => {
+      const index = this.shortcuts.findIndex(item => item === loopShortcut);
+      if (index >= 0) this.shortcuts.splice(index, 1);
+    });
   }
 
   private handleKeyDown(event: KeyboardEvent): void {
     const shortcut = this.shortcuts
       .find(item => item.key === event.key && item.ctrlKey === event.ctrlKey);
 
-    if (shortcut) { 
+    if (shortcut) {
       event.preventDefault();
       event.stopPropagation();
       shortcut.action();
