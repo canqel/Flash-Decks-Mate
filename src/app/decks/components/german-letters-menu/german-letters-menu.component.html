@@ -1,0 +1,20 @@
+<div class="context-menu-trigger" [style.left]="menuPosition.x" [style.top]="menuPosition.y"
+     [matMenuTriggerFor]="menu">
+</div>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent>
+    <ng-container *ngTemplateOutlet="letterButtonTemplate; context: { letter: aUmlaut }"></ng-container>
+    <ng-container *ngTemplateOutlet="letterButtonTemplate; context: { letter: oUmlaut }"></ng-container>
+    <ng-container *ngTemplateOutlet="letterButtonTemplate; context: { letter: uUmlaut }"></ng-container>
+    <ng-container *ngTemplateOutlet="letterButtonTemplate; context: { letter: eszett }"></ng-container>
+  </ng-template>
+
+  <ng-template #letterButtonTemplate let-letter="letter">
+    <ng-container *ngIf="(letter.value | async) as letterValue">
+      <button mat-menu-item (click)="letterSelect.emit(letterValue)">
+        {{ letterValue }}
+      </button>
+    </ng-container>
+  </ng-template>
+</mat-menu>

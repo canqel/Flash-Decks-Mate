@@ -9,6 +9,7 @@
     "node_modules/tslint-rxjs-subject-restrictions-rule/dist",
     "node_modules/tslint-defocus/dist"
   ],
+  "defaultSeverity": "warning",
   "rules": {
     "defocus": true,
     "trailing-comma": [

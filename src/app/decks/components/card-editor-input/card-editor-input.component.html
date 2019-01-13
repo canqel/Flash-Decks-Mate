@@ -4,9 +4,6 @@
   <div class="context-menu-trigger" [style.left]="menuPosition.x" [style.top]="menuPosition.y"
        [matMenuTriggerFor]="contextMenu" #contextMenuTrigger="matMenuTrigger">
   </div>
-  <div class="context-menu-trigger" [style.left]="menuPosition.x" [style.top]="menuPosition.y"
-       [matMenuTriggerFor]="germanCharsMenu" #germanCharsMenuTrigger="matMenuTrigger">
-  </div>
 </mat-form-field>
 
 <!-- TODO: It's probably not needed to create separate menus for each input -->
@@ -17,19 +14,6 @@
   </ng-template>
 </mat-menu>
 
-<mat-menu #germanCharsMenu="matMenu">
-  <ng-template matMenuContent>
-    <ng-container *ngTemplateOutlet="charButtonTemplate; context: { char: aUmlaut }"></ng-container>
-    <ng-container *ngTemplateOutlet="charButtonTemplate; context: { char: oUmlaut }"></ng-container>
-    <ng-container *ngTemplateOutlet="charButtonTemplate; context: { char: uUmlaut }"></ng-container>
-    <ng-container *ngTemplateOutlet="charButtonTemplate; context: { char: eszett }"></ng-container>
-  </ng-template>
-
-  <ng-template #charButtonTemplate let-char="char">
-    <ng-container *ngIf="(char.value | async) as charValue">
-      <button mat-menu-item (click)="addCharacter(charValue)">
-        {{ charValue }}
-      </button>
-    </ng-container>
-  </ng-template>
-</mat-menu>
+<fdm-german-letters-menu [openMenuRequests]="openGermanLettersMenuRequests.asObservable()"
+                         (letterSelect)="addCharacter($event)">
+</fdm-german-letters-menu>

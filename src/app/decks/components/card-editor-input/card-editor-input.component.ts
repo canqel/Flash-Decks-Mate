@@ -6,35 +6,8 @@ import { map, distinctUntilChanged } from 'rxjs/operators';
 import { KeyboardShortcut, ShortcutsService } from 'src/app/core/services/shortcuts.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { MatInput } from '@angular/material/input';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-
-class Position {
-  x: string;
-  y: string;
-
-  constructor(xValue: number, yValue: number) {
-    this.x = xValue + 'px';
-    this.y = yValue + 'px';
-  }
-}
-
-class Char {
-  value = new BehaviorSubject<string>('');
-  private isLowercase = true;
-
-  constructor(private lowercase: string, private uppercase: string) {
-    this.updateValue();
-  }
-
-  switchCase(): void {
-    this.isLowercase = !this.isLowercase;
-    this.updateValue();
-  }
-
-  private updateValue(): void {
-    this.value.next(this.isLowercase ? this.lowercase : this.uppercase);
-  }
-}
+import { Subject } from 'rxjs/internal/Subject';
+import { Position } from '../../decks.models';
 
 @Component({
   selector: 'fdm-card-editor-input',
@@ -49,18 +22,13 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   @ContentChild(MatInput) input: MatInput;
   @ViewChild(MatFormField) field: MatFormField;
   @ViewChild('contextMenuTrigger') contextMenuTrigger: MatMenuTrigger;
-  @ViewChild('germanCharsMenuTrigger') germanCharsMenuTrigger: MatMenuTrigger;
 
   menuPosition = new Position(0, 0);
 
-  aUmlaut = new Char('ä', 'Ä');
-  oUmlaut = new Char('ö', 'Ö');
-  uUmlaut = new Char('ü', 'Ü');
-  eszett = new Char('ß', 'ẞ');
+  openGermanLettersMenuRequests = new Subject<Position>();
 
   private showContextMenuShortcut: KeyboardShortcut;
-  private showGermanCharsMenuShortcut: KeyboardShortcut;
-  private switchGermanCharsCaseShortcut: KeyboardShortcut;
+  private showGermanLettersMenuShortcut: KeyboardShortcut;
   private subscription: Subscription;
 
   constructor(private dictionariesService: DictionariesService,
@@ -68,8 +36,7 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
 
     const spaceKey = ' ';
     this.showContextMenuShortcut = new KeyboardShortcut(spaceKey, () => this.contextMenuTrigger.openMenu(), true);
-    this.showGermanCharsMenuShortcut = new KeyboardShortcut('q', () => this.germanCharsMenuTrigger.openMenu(), true);
-    this.switchGermanCharsCaseShortcut = new KeyboardShortcut('q', () => this.switchGermanCharsCase());
+    this.showGermanLettersMenuShortcut = new KeyboardShortcut('q', () => this.showGermanLettersMenu(), true);
   }
 
   ngOnInit(): void {
@@ -83,14 +50,6 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
 
     this.subscription = focusedChanges
       .subscribe(value => this.handleFocusChanged(value));
-
-    const subscription2 = this.germanCharsMenuTrigger.menuOpened
-      .subscribe(() => this.shortcutsService.register(this.switchGermanCharsCaseShortcut));
-    const subscription3 = this.germanCharsMenuTrigger.menuClosed
-      .subscribe(() => this.shortcutsService.unregister(this.switchGermanCharsCaseShortcut));
-
-    this.subscription.add(subscription2);
-    this.subscription.add(subscription3);
   }
 
   ngOnDestroy(): void {
@@ -126,7 +85,7 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
 
   private handleFocusChanged(isFocused: boolean): void {
     this.menuPosition = this.getDefaultPosition(this.field._elementRef);
-    const shortcuts = [this.showContextMenuShortcut, this.showGermanCharsMenuShortcut];
+    const shortcuts = [this.showContextMenuShortcut, this.showGermanLettersMenuShortcut];
 
     if (isFocused) {
       this.shortcutsService.register(...shortcuts);
@@ -135,16 +94,13 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
     }
   }
 
+  private showGermanLettersMenu(): void {
+    this.openGermanLettersMenuRequests.next(this.menuPosition);
+  }
+
   private getDefaultPosition(elementRef: ElementRef<any>): Position {
     const rect = elementRef.nativeElement.getBoundingClientRect();
 
     return new Position(rect.left, rect.bottom - 15);
-  }
-
-  private switchGermanCharsCase(): void {
-    this.aUmlaut.switchCase();
-    this.oUmlaut.switchCase();
-    this.uUmlaut.switchCase();
-    this.eszett.switchCase();
   }
 }

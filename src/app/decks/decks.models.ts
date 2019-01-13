@@ -46,3 +46,13 @@ export enum Language {
   PL = 'PL',
   DE = 'DE'
 }
+
+export class Position {
+  x: string;
+  y: string;
+
+  constructor(xValue: number, yValue: number) {
+    this.x = xValue + 'px';
+    this.y = yValue + 'px';
+  }
+}
