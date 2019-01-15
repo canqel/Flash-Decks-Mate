@@ -1,13 +1,12 @@
 import { Component, Input, ChangeDetectionStrategy, OnInit, ViewChild, ContentChild, ElementRef, OnDestroy } from '@angular/core';
 import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { DictionariesService } from '../../services/dictionaries.service';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 import { KeyboardShortcut, ShortcutsService } from 'src/app/core/services/shortcuts.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { MatInput } from '@angular/material/input';
 import { Subject } from 'rxjs/internal/Subject';
 import { Position } from '../../decks.models';
+import { InputMenuData } from '../input-context-menu/input-context-menu.component';
 
 @Component({
   selector: 'fdm-card-editor-input',
@@ -21,21 +20,19 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   @ContentChild(MatFormFieldControl) fieldControl: MatFormFieldControl<any>;
   @ContentChild(MatInput) input: MatInput;
   @ViewChild(MatFormField) field: MatFormField;
-  @ViewChild('contextMenuTrigger') contextMenuTrigger: MatMenuTrigger;
 
   menuPosition = new Position(0, 0);
 
   openGermanLettersMenuRequests = new Subject<Position>();
+  openContextMenuRequests = new Subject<InputMenuData>();
 
   private showContextMenuShortcut: KeyboardShortcut;
   private showGermanLettersMenuShortcut: KeyboardShortcut;
   private subscription: Subscription;
 
-  constructor(private dictionariesService: DictionariesService,
-    private shortcutsService: ShortcutsService) {
-
+  constructor(private shortcutsService: ShortcutsService) {
     const spaceKey = ' ';
-    this.showContextMenuShortcut = new KeyboardShortcut(spaceKey, () => this.contextMenuTrigger.openMenu(), true);
+    this.showContextMenuShortcut = new KeyboardShortcut(spaceKey, () => this.showContextMenu(), true);
     this.showGermanLettersMenuShortcut = new KeyboardShortcut('q', () => this.showGermanLettersMenu(), true);
   }
 
@@ -59,28 +56,12 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   onContextMenu(event: MouseEvent): void {
     event.preventDefault();
     this.menuPosition = new Position(event.clientX, event.clientY);
-    this.contextMenuTrigger.openMenu();
-  }
-
-  openInDiki(): void {
-    const url = this.dictionariesService.generateUrlForDiki(this.fieldControl.value);
-    this.open(url);
-  }
-
-  openInGoogleTranslate(): void {
-    const url = this.dictionariesService.generateUrlForGoogleTranslate(this.fieldControl.value);
-    this.open(url);
+    this.showContextMenu();
   }
 
   addCharacter(character: string): void {
     this.input.value = this.input.value + character;
     this.input.focus();
-  }
-
-  private open(url: string): void {
-    if (url == null) return;
-
-    window.open(url, '_blank');
   }
 
   private handleFocusChanged(isFocused: boolean): void {
@@ -96,6 +77,11 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
 
   private showGermanLettersMenu(): void {
     this.openGermanLettersMenuRequests.next(this.menuPosition);
+  }
+
+  private showContextMenu(): void {
+    const inputData = { position: this.menuPosition, inputText: this.fieldControl.value };
+    this.openContextMenuRequests.next(inputData);
   }
 
   private getDefaultPosition(elementRef: ElementRef<any>): Position {

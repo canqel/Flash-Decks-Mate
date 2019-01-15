@@ -12,9 +12,10 @@ import { DeckExportDialogComponent } from './components/deck-export-dialog/deck-
 import { MatMenuModule } from '@angular/material/menu';
 import { CardEditorInputComponent } from './components/card-editor-input/card-editor-input.component';
 import { GermanLettersMenuComponent } from './components/german-letters-menu/german-letters-menu.component';
+import { InputContextMenuComponent } from './components/input-context-menu/input-context-menu.component';
 
 @NgModule({
-  declarations: [DeckEditorComponent, CardEditorComponent, DeckExportDialogComponent, CardEditorInputComponent, GermanLettersMenuComponent],
+  declarations: [DeckEditorComponent, CardEditorComponent, DeckExportDialogComponent, CardEditorInputComponent, GermanLettersMenuComponent, InputContextMenuComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
