@@ -16,15 +16,15 @@ export interface InputMenuData {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputContextMenuComponent implements OnInit, OnDestroy {
-  
+
   @Input() openMenuRequests: Observable<InputMenuData>;
 
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
   menuPosition = new Position(0, 0);
-  
+
   private subscriptions: Subscription;
   private inputText: string;
-  
+
   constructor(private dictionariesService: DictionariesService) { }
 
   ngOnInit() {

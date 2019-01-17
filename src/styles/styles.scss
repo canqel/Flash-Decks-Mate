@@ -16,3 +16,7 @@ body {
   max-width: $page-width;
   margin: 0 auto;
 }
+
+.floating-menu-trigger {
+  position: fixed;
+}

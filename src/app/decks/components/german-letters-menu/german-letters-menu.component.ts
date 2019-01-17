@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -26,7 +26,8 @@ class Letter {
 
 @Component({
   selector: 'fdm-german-letters-menu',
-  templateUrl: './german-letters-menu.component.html'
+  templateUrl: './german-letters-menu.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GermanLettersMenuComponent implements OnInit, OnDestroy {
 
