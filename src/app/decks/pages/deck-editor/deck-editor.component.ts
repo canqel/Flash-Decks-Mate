@@ -3,6 +3,7 @@ import { FlashCard, Language } from '../../decks.models';
 import { DeckExporterService } from '../../services/deck-exporter.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeckExportDialogComponent } from '../../components/deck-export-dialog/deck-export-dialog.component';
+import { ShortcutsService, KeyboardShortcut } from 'src/app/core/services/shortcuts.service';
 
 @Component({
   templateUrl: './deck-editor.component.html',
@@ -16,11 +17,15 @@ export class DeckEditorComponent {
   private side2Lang = Language.PL;
 
   constructor(private deckExporter: DeckExporterService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    shortcutsService: ShortcutsService) {
     // TMP:
     const card = new FlashCard(this.side1Lang, this.side2Lang);
     card.word.setValues('Word test DE', 'Word test PL');
     this.cards = [card];
+
+    const addCardShortcut = new KeyboardShortcut('i', () => this.addCard(), true);
+    shortcutsService.register(addCardShortcut);
   }
 
   addCard(): void {
