@@ -131,7 +131,7 @@ class TestCase6 extends TestCase1 {
 function createFlashCard(word1: string, word2: string,
   example1 = '', example2 = '', clarification1 = '', clarification2 = ''): FlashCard {
 
-  const card = new FlashCard(Language.DE, Language.PL);
+  const card = new FlashCard(0, Language.DE, Language.PL);
   card.word.side1.value = word1;
   card.word.side2.value = word2;
   card.example.side1.value = example1;
