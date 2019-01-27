@@ -37,6 +37,12 @@ export class FlashCard {
   }
 }
 
+export class DeckState {
+  cards: FlashCard[] = [];
+  side1Lang = Language.DE;
+  side2Lang = Language.PL;
+}
+
 export interface LocalizedString {
   lang: Language;
   value: string;
