@@ -1,14 +1,8 @@
 import { Component, OnInit, Input, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { Position } from '../../decks.models';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DictionariesService } from '../../services/dictionaries.service';
-
-export interface InputMenuData {
-  position: Position;
-  inputText: string;
-}
 
 @Component({
   selector: 'fdm-input-context-menu',
@@ -17,10 +11,9 @@ export interface InputMenuData {
 })
 export class InputContextMenuComponent implements OnInit, OnDestroy {
 
-  @Input() openMenuRequests: Observable<InputMenuData>;
+  @Input() openMenuRequests: Observable<string>;
 
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
-  menuPosition = new Position(0, 0);
 
   private subscriptions: Subscription;
   private inputText: string;
@@ -45,9 +38,8 @@ export class InputContextMenuComponent implements OnInit, OnDestroy {
     this.open(url);
   }
 
-  private openMenu(data: InputMenuData): void {
-    this.menuPosition = data.position;
-    this.inputText = data.inputText;
+  private openMenu(text: string): void {
+    this.inputText = text;
     this.menuTrigger.openMenu();
   }
 

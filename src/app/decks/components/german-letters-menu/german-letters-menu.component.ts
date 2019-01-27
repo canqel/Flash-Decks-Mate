@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, Input, OnDestroy, C
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { Position } from '../../decks.models';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { KeyboardShortcut, ShortcutsService } from 'src/app/core/services/shortcuts.service';
 
@@ -31,11 +30,10 @@ class Letter {
 })
 export class GermanLettersMenuComponent implements OnInit, OnDestroy {
 
-  @Input() openMenuRequests: Observable<Position>;
+  @Input() openMenuRequests: Observable<void>;
   @Output() letterSelect = new EventEmitter<string>();
 
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
-  menuPosition = new Position(0, 0);
   aUmlaut = new Letter('ä', 'Ä');
   oUmlaut = new Letter('ö', 'Ö');
   uUmlaut = new Letter('ü', 'Ü');
@@ -48,7 +46,7 @@ export class GermanLettersMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions = this.openMenuRequests.subscribe(item => this.openMenu(item));
+    this.subscriptions = this.openMenuRequests.subscribe(() => this.openMenu());
 
     this.setupSwitchCaseShortcut();
   }
@@ -57,8 +55,7 @@ export class GermanLettersMenuComponent implements OnInit, OnDestroy {
     if (this.subscriptions) this.subscriptions.unsubscribe();
   }
 
-  private openMenu(position: Position): void {
-    this.menuPosition = position;
+  private openMenu(): void {
     this.menuTrigger.openMenu();
   }
 

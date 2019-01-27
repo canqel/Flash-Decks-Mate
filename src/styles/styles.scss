@@ -18,5 +18,8 @@ body {
 }
 
 .floating-menu-trigger {
-  position: fixed;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  margin-top: -21px;
 }

@@ -5,8 +5,6 @@ import { KeyboardShortcut, ShortcutsService } from 'src/app/core/services/shortc
 import { Subscription } from 'rxjs/internal/Subscription';
 import { MatInput } from '@angular/material/input';
 import { Subject } from 'rxjs/internal/Subject';
-import { Position } from '../../decks.models';
-import { InputMenuData } from '../input-context-menu/input-context-menu.component';
 
 @Component({
   selector: 'fdm-card-editor-input',
@@ -21,10 +19,8 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   @ContentChild(MatInput) input: MatInput;
   @ViewChild(MatFormField) field: MatFormField;
 
-  menuPosition = new Position(0, 0);
-
-  openGermanLettersMenuRequests = new Subject<Position>();
-  openContextMenuRequests = new Subject<InputMenuData>();
+  openGermanLettersMenuRequests = new Subject<void>();
+  openContextMenuRequests = new Subject<string>();
 
   private showContextMenuShortcut: KeyboardShortcut;
   private showGermanLettersMenuShortcut: KeyboardShortcut;
@@ -55,7 +51,6 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
 
   onContextMenu(event: MouseEvent): void {
     event.preventDefault();
-    this.menuPosition = new Position(event.clientX, event.clientY);
     this.showContextMenu();
   }
 
@@ -65,7 +60,6 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   }
 
   private handleFocusChanged(isFocused: boolean): void {
-    this.menuPosition = this.getDefaultPosition(this.field._elementRef);
     const shortcuts = [this.showContextMenuShortcut, this.showGermanLettersMenuShortcut];
 
     if (isFocused) {
@@ -76,17 +70,10 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   }
 
   private showGermanLettersMenu(): void {
-    this.openGermanLettersMenuRequests.next(this.menuPosition);
+    this.openGermanLettersMenuRequests.next();
   }
 
   private showContextMenu(): void {
-    const inputData = { position: this.menuPosition, inputText: this.fieldControl.value };
-    this.openContextMenuRequests.next(inputData);
-  }
-
-  private getDefaultPosition(elementRef: ElementRef<any>): Position {
-    const rect = elementRef.nativeElement.getBoundingClientRect();
-
-    return new Position(rect.left, rect.bottom - 15);
+    this.openContextMenuRequests.next(this.fieldControl.value);
   }
 }
