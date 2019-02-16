@@ -1,4 +1,4 @@
-import { isNullOrWhitespace } from '../shared/string-utils';
+import { isNullOrWhitespace } from '../../shared/string-utils';
 
 export class FlashCardEntry {
   side1: LocalizedString;

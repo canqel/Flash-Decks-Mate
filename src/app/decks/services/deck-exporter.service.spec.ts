@@ -1,5 +1,5 @@
 import { DeckExporterService, DeckExporterConstants } from './deck-exporter.service';
-import { FlashCard, Language } from '../decks.models';
+import { FlashCard, Language } from '../state/decks.models';
 
 /* tslint:disable */
 describe('DeckExporterService', () => {

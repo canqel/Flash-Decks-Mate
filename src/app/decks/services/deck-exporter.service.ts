@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FlashCard, FlashCardEntry } from '../decks.models';
+import { FlashCard, FlashCardEntry } from '../state/decks.models';
 
 export const DeckExporterConstants = {
   cardElementSeparator: ';',

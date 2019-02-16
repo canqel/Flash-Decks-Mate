@@ -1,9 +1,12 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { FlashCard, Language } from '../../decks.models';
+import {
+  Component, ChangeDetectionStrategy, Input, Output,
+  EventEmitter, OnDestroy, ViewChild, ElementRef, AfterViewInit
+} from '@angular/core';
+import { FlashCard, Language } from '../../state/decks.models';
 import { FormControl, FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { DeckStore } from '../../services/deck.store';
+import { DeckQuery } from '../../state/deck.query';
 
 @Component({
   selector: 'fdm-card-editor',
@@ -42,11 +45,11 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
   private clarification2Control: FormControl;
   private cardId: number;
 
-  constructor(private deckStore: DeckStore) {
+  constructor(private deckQuery: DeckQuery) {
   }
 
   ngAfterViewInit(): void {
-    if (this.deckStore.state.addedCardId === this.cardId) {
+    if (this.deckQuery.activeCardId === this.cardId) {
       // TODO: Better solution?
       setTimeout(() => {
         this.firstInputRef.nativeElement.focus();
