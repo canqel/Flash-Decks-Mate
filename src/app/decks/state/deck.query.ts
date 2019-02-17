@@ -6,10 +6,20 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class DeckQuery extends QueryEntity<DeckState, FlashCard> {
   cards$ = this.selectAll();
-  cards = this.getAll();
-  activeCardId: number = this.getActiveId();
 
   constructor(protected store: DeckStore) {
     super(store);
+
+    this.cards$.subscribe(item => {
+      console.table(item);
+    });
+  }
+
+  getCards(): FlashCard[] {
+    return this.getAll();
+  }
+
+  getActiveCardId(): number {
+    return this.getActiveId();
   }
 }

@@ -49,7 +49,7 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.deckQuery.activeCardId === this.cardId) {
+    if (this.deckQuery.getActiveCardId() === this.cardId) {
       // TODO: Better solution?
       setTimeout(() => {
         this.firstInputRef.nativeElement.focus();

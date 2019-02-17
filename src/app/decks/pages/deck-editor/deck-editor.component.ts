@@ -24,7 +24,7 @@ export class DeckEditorComponent {
   }
 
   export(): void {
-    const output = this.deckExporter.export(this.deckQuery.cards);
+    const output = this.deckExporter.export(this.deckQuery.getCards());
     this.openExportDialog(output);
   }
 
