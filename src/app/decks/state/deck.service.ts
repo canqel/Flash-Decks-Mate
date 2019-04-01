@@ -20,6 +20,7 @@ export class DeckService {
   updateCard(id: number, newState: FlashCard): void {
     // deckStore.update() causes problems (id value changes to object).
     this.deckStore.setActive(null);
-    this.deckStore.createOrReplace(id, newState);
+    // this.deckStore.createOrReplace(id, newState);
+    this.deckStore.update(id, newState);
   }
 }
