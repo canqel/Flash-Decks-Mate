@@ -43,7 +43,7 @@ export class DeckState {
   cards: FlashCard[] = [];
   side1Lang = Language.DE;
   side2Lang = Language.PL;
-  addedCardId?: number = null;
+  activeCardId?: number = null;
 }
 
 export interface LocalizedString {

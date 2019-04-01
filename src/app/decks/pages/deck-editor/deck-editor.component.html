@@ -1,4 +1,4 @@
-<div class="deck-container" *ngIf="(deckStore.state$ | async).cards as cards">
+<div class="deck-container" *ngIf="deckStore.cards$ | async as cards">
   <div class="deck-header mat-h2">
     <div class="row">
       <div class="col">
@@ -16,7 +16,8 @@
 
   <div class="deck-body">
     <div class="card-editor-wrapper" *ngFor="let card of cards; let loopIndex=index">
-      <fdm-card-editor [card]="card" [index]="loopIndex" (cardChange)="deckStore.changeCard($event, loopIndex)">
+      <fdm-card-editor [card]="card" [index]="loopIndex"
+                       (cardChange)="deckStore.changeCard($event, loopIndex)">
       </fdm-card-editor>
     </div>
   </div>

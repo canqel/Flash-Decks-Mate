@@ -1,4 +1,7 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component, ChangeDetectionStrategy, Input, Output, EventEmitter,
+  OnDestroy, ViewChild, ElementRef, AfterViewInit
+} from '@angular/core';
 import { FlashCard, Language } from '../../decks.models';
 import { FormControl, FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
@@ -46,7 +49,7 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.deckStore.state.addedCardId === this.cardId) {
+    if (this.deckStore.state.activeCardId === this.cardId) {
       // TODO: Better solution?
       setTimeout(() => {
         this.firstInputRef.nativeElement.focus();
