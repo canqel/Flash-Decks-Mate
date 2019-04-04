@@ -1,6 +1,6 @@
 import { QueryEntity } from '@datorama/akita';
 import { DeckState, DeckStore } from './deck.store';
-import { FlashCard } from './decks.models';
+import { FlashCard, Language } from './decks.models';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -9,10 +9,6 @@ export class DeckQuery extends QueryEntity<DeckState, FlashCard> {
 
   constructor(protected store: DeckStore) {
     super(store);
-
-    this.cards$.subscribe(item => {
-      console.table(item);
-    });
   }
 
   getCards(): FlashCard[] {
@@ -21,5 +17,13 @@ export class DeckQuery extends QueryEntity<DeckState, FlashCard> {
 
   getActiveCardId(): number {
     return this.getActiveId();
+  }
+
+  getSide1Lang(): Language {
+    return this.getValue().side1Lang;
+  }
+
+  getSide2Lang(): Language {
+    return this.getValue().side2Lang;
   }
 }

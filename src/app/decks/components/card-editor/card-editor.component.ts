@@ -2,11 +2,12 @@ import {
   Component, ChangeDetectionStrategy, Input, Output,
   EventEmitter, OnDestroy, ViewChild, ElementRef, AfterViewInit
 } from '@angular/core';
-import { FlashCard, Language } from '../../state/decks.models';
+import { FlashCard } from '../../state/decks.models';
 import { FormControl, FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DeckQuery } from '../../state/deck.query';
+import { createCard } from '../../services/card.helper';
 
 @Component({
   selector: 'fdm-card-editor',
@@ -34,8 +35,6 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
   showClarification = false;
 
   private subscription: Subscription;
-  private side1Lang: Language;
-  private side2Lang: Language;
 
   private word1Control: FormControl;
   private word2Control: FormControl;
@@ -67,8 +66,8 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
     this.word2Control = new FormControl(card.word.side2.value);
     this.example1Control = new FormControl(card.example.side1.value);
     this.example2Control = new FormControl(card.example.side2.value);
-    this.clarification1Control = new FormControl(card.example.side1.value);
-    this.clarification2Control = new FormControl(card.example.side2.value);
+    this.clarification1Control = new FormControl(card.clarification.side1.value);
+    this.clarification2Control = new FormControl(card.clarification.side2.value);
 
     this.form = new FormGroup({
       word1: this.word1Control,
@@ -81,14 +80,17 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
 
     const subscription = this.form.valueChanges
       .pipe(
-        map(() => this.createCard())
+        map(() => this.cloneCard())
       )
       .subscribe(newData => this.cardChange.emit(newData));
     this.subscription = subscription;
   }
 
-  private createCard(): FlashCard {
-    const card = new FlashCard(this.cardId, this.side1Lang, this.side2Lang);
+  private cloneCard(): FlashCard {
+    const side1Lang = this.deckQuery.getSide1Lang();
+    const side2Lang = this.deckQuery.getSide2Lang();
+
+    const card = createCard(this.cardId, side1Lang, side2Lang);
     card.word.setValues(this.word1Control.value, this.word2Control.value);
     card.example.setValues(this.example1Control.value, this.example2Control.value);
     card.clarification.setValues(this.clarification1Control.value, this.clarification2Control.value);

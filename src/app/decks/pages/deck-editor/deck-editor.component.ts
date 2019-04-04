@@ -12,7 +12,6 @@ import { FlashCard } from '../../state/decks.models';
   styleUrls: ['./deck-editor.component.scss']
 })
 export class DeckEditorComponent {
-
   constructor(public deckService: DeckService,
     public deckQuery: DeckQuery,
     private deckExporter: DeckExporterService,
@@ -30,6 +29,11 @@ export class DeckEditorComponent {
 
   update(card: FlashCard): void {
     this.deckService.updateCard(card.id, card);
+  }
+
+  // tslint:disable-next-line:no-unused
+  trackByFn(index: number, item: FlashCard): any {
+    return item.id;
   }
 
   private openExportDialog(output: string): void {

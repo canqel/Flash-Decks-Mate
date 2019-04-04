@@ -24,19 +24,6 @@ export class FlashCard {
   word: FlashCardEntry;
   example: FlashCardEntry;
   clarification: FlashCardEntry;
-
-  constructor(id: number, side1Lang: Language, side2Lang: Language) {
-    this.id = id;
-    this.word = new FlashCardEntry(side1Lang, side2Lang);
-    this.example = new FlashCardEntry(side1Lang, side2Lang);
-    this.clarification = new FlashCardEntry(side1Lang, side2Lang);
-  }
-
-  replaceValues(anotherCard: FlashCard): void {
-    this.word = anotherCard.word;
-    this.example = anotherCard.example;
-    this.clarification = anotherCard.clarification;
-  }
 }
 
 export class DeckState {
