@@ -3,26 +3,37 @@ import { DeckExporterService } from '../../services/deck-exporter.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeckExportDialogComponent } from '../../components/deck-export-dialog/deck-export-dialog.component';
 import { ShortcutsService, KeyboardShortcut } from 'src/app/core/services/shortcuts.service';
-import { DeckStore } from '../../services/deck.store';
+import { DeckService } from '../../state/deck.service';
+import { DeckQuery } from '../../state/deck.query';
+import { FlashCard } from '../../state/decks.models';
 
 @Component({
   templateUrl: './deck-editor.component.html',
   styleUrls: ['./deck-editor.component.scss']
 })
 export class DeckEditorComponent {
-
-  constructor(public deckStore: DeckStore,
+  constructor(public deckService: DeckService,
+    public deckQuery: DeckQuery,
     private deckExporter: DeckExporterService,
     private dialog: MatDialog,
     shortcutsService: ShortcutsService) {
 
-    const addCardShortcut = new KeyboardShortcut('i', () => this.deckStore.addCard(), true);
+    const addCardShortcut = new KeyboardShortcut('i', () => this.deckService.addCard(), true);
     shortcutsService.register(addCardShortcut);
   }
 
   export(): void {
-    const output = this.deckExporter.export(this.deckStore.state.cards);
+    const output = this.deckExporter.export(this.deckQuery.getCards());
     this.openExportDialog(output);
+  }
+
+  update(card: FlashCard): void {
+    this.deckService.updateCard(card.id, card);
+  }
+
+  // tslint:disable-next-line:no-unused
+  trackByFn(index: number, item: FlashCard): any {
+    return item.id;
   }
 
   private openExportDialog(output: string): void {
