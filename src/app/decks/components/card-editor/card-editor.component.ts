@@ -34,15 +34,15 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
   showExample = false;
   showClarification = false;
 
-  private subscription: Subscription;
+  word1Control: FormControl;
+  word2Control: FormControl;
+  example1Control: FormControl;
+  example2Control: FormControl;
+  clarification1Control: FormControl;
+  clarification2Control: FormControl;
 
-  private word1Control: FormControl;
-  private word2Control: FormControl;
-  private example1Control: FormControl;
-  private example2Control: FormControl;
-  private clarification1Control: FormControl;
-  private clarification2Control: FormControl;
   private cardId: number;
+  private subscription: Subscription;
 
   constructor(private deckQuery: DeckQuery) {
   }

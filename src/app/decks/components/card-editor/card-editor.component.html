@@ -1,15 +1,15 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col">
-      <fdm-card-editor-input label="Word">
+      <fdm-card-editor-input label="Word" [control]="word1Control">
         <input matInput #firstInput formControlName="word1" [attr.tabindex]="baseTabIndex + 1">
       </fdm-card-editor-input>
 
-      <fdm-card-editor-input *ngIf="showExample" label="Example">
+      <fdm-card-editor-input *ngIf="showExample" label="Example" [control]="example1Control">
         <input matInput formControlName="example1" [attr.tabindex]="baseTabIndex + 3">
       </fdm-card-editor-input>
 
-      <fdm-card-editor-input *ngIf="showClarification" label="Clarification">
+      <fdm-card-editor-input *ngIf="showClarification" label="Clarification" [control]="clarification1Control">
         <input matInput formControlName="clarification1" [attr.tabindex]="baseTabIndex + 5">
       </fdm-card-editor-input>
     </div>
@@ -32,15 +32,15 @@
     </div>
 
     <div class="col">
-      <fdm-card-editor-input label="Word">
+      <fdm-card-editor-input label="Word" [control]="word2Control">
         <input matInput formControlName="word2" [attr.tabindex]="baseTabIndex + 2">
       </fdm-card-editor-input>
 
-      <fdm-card-editor-input *ngIf="showExample" label="Example">
+      <fdm-card-editor-input *ngIf="showExample" label="Example" [control]="example2Control">
         <input matInput formControlName="example2" [attr.tabindex]="baseTabIndex + 4">
       </fdm-card-editor-input>
 
-      <fdm-card-editor-input *ngIf="showClarification" label="Clarification">
+      <fdm-card-editor-input *ngIf="showClarification" label="Clarification" [control]="clarification2Control">
         <input matInput formControlName="clarification2" [attr.tabindex]="baseTabIndex + 6">
       </fdm-card-editor-input>
     </div>

@@ -1,10 +1,11 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit, ViewChild, ContentChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnInit, ViewChild, ContentChild, OnDestroy } from '@angular/core';
 import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 import { KeyboardShortcut, ShortcutsService } from 'src/app/core/services/shortcuts.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { MatInput } from '@angular/material/input';
 import { Subject } from 'rxjs/internal/Subject';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'fdm-card-editor-input',
@@ -14,6 +15,7 @@ import { Subject } from 'rxjs/internal/Subject';
 })
 export class CardEditorInputComponent implements OnInit, OnDestroy {
   @Input() label: string;
+  @Input() control: FormControl;
 
   @ContentChild(MatFormFieldControl) fieldControl: MatFormFieldControl<any>;
   @ContentChild(MatInput) input: MatInput;
@@ -55,8 +57,10 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   }
 
   addCharacter(character: string): void {
-    this.input.value = this.input.value + character;
-    this.input.focus();
+    if (!this.control) return;
+
+    const newValue = this.control.value + character;
+    this.control.setValue(newValue);
   }
 
   private handleFocusChanged(isFocused: boolean): void {
