@@ -20,7 +20,7 @@ export class InputContextMenuComponent implements OnInit, OnDestroy {
 
   constructor(private dictionariesService: DictionariesService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscriptions = this.openMenuRequests.subscribe(item => this.openMenu(item));
   }
 

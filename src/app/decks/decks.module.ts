@@ -15,7 +15,9 @@ import { GermanLettersMenuComponent } from './components/german-letters-menu/ger
 import { InputContextMenuComponent } from './components/input-context-menu/input-context-menu.component';
 
 @NgModule({
-  declarations: [DeckEditorComponent, CardEditorComponent, DeckExportDialogComponent, CardEditorInputComponent, GermanLettersMenuComponent, InputContextMenuComponent],
+  declarations: [DeckEditorComponent, CardEditorComponent,
+    DeckExportDialogComponent, CardEditorInputComponent,
+    GermanLettersMenuComponent, InputContextMenuComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

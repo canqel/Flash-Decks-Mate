@@ -26,6 +26,11 @@ export class FlashCard {
   clarification: FlashCardEntry;
 }
 
+export enum Language {
+  PL = 'PL',
+  DE = 'DE'
+}
+
 export class DeckState {
   cards: FlashCard[] = [];
   side1Lang = Language.DE;
@@ -36,9 +41,4 @@ export class DeckState {
 export interface LocalizedString {
   lang: Language;
   value: string;
-}
-
-export enum Language {
-  PL = 'PL',
-  DE = 'DE'
 }
