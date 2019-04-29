@@ -32,6 +32,7 @@ export class GermanLettersMenuComponent implements OnInit, OnDestroy {
 
   @Input() openMenuRequests: Observable<void>;
   @Output() letterSelect = new EventEmitter<string>();
+  @Output() closed = new EventEmitter<void>();
 
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
   aUmlaut = new Letter('ä', 'Ä');
@@ -53,6 +54,10 @@ export class GermanLettersMenuComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.subscriptions) this.subscriptions.unsubscribe();
+  }
+
+  handleMenuClosed(): void {
+    this.closed.emit();
   }
 
   private openMenu(): void {

@@ -1,7 +1,7 @@
 <div class="floating-menu-trigger" [matMenuTriggerFor]="menu">
 </div>
 
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" (closed)="handleMenuClosed()">
   <ng-template matMenuContent>
     <ng-container *ngTemplateOutlet="letterButtonTemplate; context: { letter: aUmlaut }"></ng-container>
     <ng-container *ngTemplateOutlet="letterButtonTemplate; context: { letter: oUmlaut }"></ng-container>

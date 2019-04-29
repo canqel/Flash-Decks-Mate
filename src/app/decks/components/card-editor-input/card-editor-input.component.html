@@ -7,5 +7,5 @@
 </fdm-input-context-menu>
 
 <fdm-german-letters-menu [openMenuRequests]="openGermanLettersMenuRequests.asObservable()"
-                         (letterSelect)="addCharacter($event)">
+                         (letterSelect)="addCharacter($event)" (closed)="focusInput()">
 </fdm-german-letters-menu>

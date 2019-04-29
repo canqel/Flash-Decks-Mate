@@ -63,6 +63,10 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
     this.control.setValue(newValue);
   }
 
+  focusInput(): void {
+    this.input.focus();
+  }
+
   private handleFocusChanged(isFocused: boolean): void {
     const shortcuts = [this.showContextMenuShortcut, this.showGermanLettersMenuShortcut];
 
