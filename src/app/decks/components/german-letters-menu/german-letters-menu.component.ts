@@ -31,7 +31,7 @@ class Letter {
 export class GermanLettersMenuComponent implements OnInit, OnDestroy {
 
   @Input() openMenuRequests: Observable<void>;
-  @Output() letterSelect = new EventEmitter<string>();
+  @Output() letterSelected = new EventEmitter<string>();
   @Output() closed = new EventEmitter<void>();
 
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;

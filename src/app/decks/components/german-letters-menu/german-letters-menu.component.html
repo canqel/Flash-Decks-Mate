@@ -11,7 +11,7 @@
 
   <ng-template #letterButtonTemplate let-letter="letter">
     <ng-container *ngIf="(letter.value | async) as letterValue">
-      <button mat-menu-item (click)="letterSelect.emit(letterValue)">
+      <button mat-menu-item (click)="letterSelected.emit(letterValue)">
         {{ letterValue }}
       </button>
     </ng-container>

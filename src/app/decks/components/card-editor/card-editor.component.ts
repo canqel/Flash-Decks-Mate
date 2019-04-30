@@ -25,7 +25,7 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
     this.baseTabIndex = newValue * 10;
   }
 
-  @Output() cardChange = new EventEmitter<FlashCard>();
+  @Output() cardChanged = new EventEmitter<FlashCard>();
 
   @ViewChild('firstInput') firstInputRef: ElementRef;
   isInEditMode = true;
@@ -82,7 +82,7 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
       .pipe(
         map(() => this.cloneCard())
       )
-      .subscribe(newData => this.cardChange.emit(newData));
+      .subscribe(newData => this.cardChanged.emit(newData));
     this.subscription = subscription;
   }
 
