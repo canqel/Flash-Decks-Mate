@@ -9,13 +9,19 @@
       </div>
     </div>
 
-    <button mat-mini-fab class="add-button" (click)="deckService.addCard()">
-      <mat-icon>add</mat-icon>
-    </button>
+    <div class="buttons-container">
+      <button mat-mini-fab (click)="deckService.addCard()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" (click)="deckService.reset()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
   </div>
 
   <div class="deck-body">
-    <div class="card-editor-wrapper" *ngFor="let card of cards; let loopIndex=index; trackBy: trackByFn">
+    <div class="card-editor-wrapper"
+         *ngFor="let card of cards; let loopIndex=index; trackBy: trackByFn">
       <fdm-card-editor [card]="card" [index]="loopIndex" (cardChanged)="update($event)">
       </fdm-card-editor>
     </div>

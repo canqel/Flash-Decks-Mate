@@ -23,8 +23,12 @@
       }
     }
 
-    .add-button {
+    .buttons-container {
       margin-bottom: 1rem;
+
+      button {
+        margin: 0 0.5rem;
+      }
     }
   }
 

@@ -13,7 +13,7 @@ const initialState: DeckState = {
 };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'deck' })
+@StoreConfig({ name: 'deck', resettable: true })
 export class DeckStore extends EntityStore<DeckState, FlashCard> {
   constructor() {
     super(initialState);

@@ -22,4 +22,8 @@ export class DeckService {
     this.deckStore.setActive(id);
     this.deckStore.update(id, newState);
   }
+
+  reset(): void {
+    this.deckStore.reset();
+  }
 }
