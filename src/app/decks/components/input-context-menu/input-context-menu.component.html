@@ -1,9 +1,13 @@
 <div class="floating-menu-trigger" [matMenuTriggerFor]="menu">
 </div>
 
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" (closed)="handleMenuClosed()">
   <ng-template matMenuContent>
-    <button mat-menu-item (click)="openInDiki()">Look up in Diki.pl</button>
-    <button mat-menu-item (click)="openInGoogleTranslate()">Look up in Google Translate</button>
+    <button mat-menu-item (click)="openInDiki()">
+      Look up in Diki.pl
+    </button>
+    <button mat-menu-item (click)="openInGoogleTranslate()">
+      Look up in Google Translate
+    </button>
   </ng-template>
 </mat-menu>

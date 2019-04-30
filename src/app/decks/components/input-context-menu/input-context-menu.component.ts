@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component, OnInit, Input, ViewChild, OnDestroy,
+  ChangeDetectionStrategy, Output, EventEmitter
+} from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -12,6 +15,7 @@ import { DictionariesService } from '../../services/dictionaries.service';
 export class InputContextMenuComponent implements OnInit, OnDestroy {
 
   @Input() openMenuRequests: Observable<string>;
+  @Output() closed = new EventEmitter<void>();
 
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
 
@@ -36,6 +40,10 @@ export class InputContextMenuComponent implements OnInit, OnDestroy {
   openInGoogleTranslate(): void {
     const url = this.dictionariesService.generateUrlForGoogleTranslate(this.inputText);
     this.open(url);
+  }
+
+  handleMenuClosed(): void {
+    this.closed.emit();
   }
 
   private openMenu(text: string): void {

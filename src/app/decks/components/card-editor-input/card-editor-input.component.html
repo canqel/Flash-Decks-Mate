@@ -1,9 +1,11 @@
-<mat-form-field appearance="fill" color="accent" class="form-field" (contextmenu)="onContextMenu($event)">
+<mat-form-field appearance="fill" color="accent" class="form-field"
+                (contextmenu)="onContextMenu($event)">
   <mat-label>{{ label }}</mat-label>
   <ng-content></ng-content>
 </mat-form-field>
 
-<fdm-input-context-menu [openMenuRequests]="openContextMenuRequests.asObservable()">
+<fdm-input-context-menu [openMenuRequests]="openContextMenuRequests.asObservable()"
+                        (closed)="focusInput()">
 </fdm-input-context-menu>
 
 <fdm-german-letters-menu [openMenuRequests]="openGermanLettersMenuRequests.asObservable()"
