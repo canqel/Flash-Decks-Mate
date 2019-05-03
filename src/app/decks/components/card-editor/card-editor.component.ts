@@ -18,7 +18,7 @@ import { createCard } from '../../services/card.helper';
 export class CardEditorComponent implements OnDestroy, AfterViewInit {
 
   @Input() set card(newValue: FlashCard) {
-    this.initForm(newValue);
+    this.init(newValue);
   }
 
   @Input() set index(newValue: number) {
@@ -60,15 +60,33 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
-  private initForm(card: FlashCard): void {
+  private init(card: FlashCard): void {
+    const isCardNewForThisComponent = this.cardId === card.id;
     this.cardId = card.id;
+    this.initControls(card);
+    this.initForm();
+
+    // There is no need to update the elements visibility,
+    // if this component was displaying the same card earlier.
+    if (isCardNewForThisComponent === false) this.updateElementsVisibility(card);
+
+    this.subscription = this.form.valueChanges
+      .pipe(
+        map(() => this.cloneCard())
+      )
+      .subscribe(newData => this.cardChanged.emit(newData));
+  }
+
+  private initControls(card: FlashCard): void {
     this.word1Control = new FormControl(card.word.side1.value);
     this.word2Control = new FormControl(card.word.side2.value);
     this.example1Control = new FormControl(card.example.side1.value);
     this.example2Control = new FormControl(card.example.side2.value);
     this.clarification1Control = new FormControl(card.clarification.side1.value);
     this.clarification2Control = new FormControl(card.clarification.side2.value);
+  }
 
+  private initForm(): void {
     this.form = new FormGroup({
       word1: this.word1Control,
       word2: this.word2Control,
@@ -77,13 +95,11 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
       clarification1: this.clarification1Control,
       clarification2: this.clarification2Control
     }, { updateOn: 'blur' });
+  }
 
-    const subscription = this.form.valueChanges
-      .pipe(
-        map(() => this.cloneCard())
-      )
-      .subscribe(newData => this.cardChanged.emit(newData));
-    this.subscription = subscription;
+  private updateElementsVisibility(card: FlashCard): void {
+    this.showExample = card.example.isEmpty() === false;
+    this.showClarification = card.clarification.isEmpty() === false;
   }
 
   private cloneCard(): FlashCard {
