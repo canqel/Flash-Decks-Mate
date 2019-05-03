@@ -13,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CardEditorInputComponent } from './components/card-editor-input/card-editor-input.component';
 import { GermanLettersMenuComponent } from './components/german-letters-menu/german-letters-menu.component';
 import { InputContextMenuComponent } from './components/input-context-menu/input-context-menu.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [DeckEditorComponent, CardEditorComponent,
@@ -26,7 +27,8 @@ import { InputContextMenuComponent } from './components/input-context-menu/input
     MatIconModule,
     MatInputModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule
   ],
   entryComponents: [DeckExportDialogComponent]
 })
