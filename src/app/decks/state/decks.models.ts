@@ -31,13 +31,6 @@ export enum Language {
   DE = 'DE'
 }
 
-export class DeckState {
-  cards: FlashCard[] = [];
-  side1Lang = Language.DE;
-  side2Lang = Language.PL;
-  activeCardId?: number = null;
-}
-
 export interface LocalizedString {
   lang: Language;
   value: string;
