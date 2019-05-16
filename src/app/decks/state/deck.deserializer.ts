@@ -8,8 +8,9 @@ interface State {
 export class DeckStateDeserializer {
   static deserialize(data: string): State {
     const state = <State>JSON.parse(data);
-
     const deck = state.deck;
+    if (deck == null) return state;
+
     for (const loopKey in deck.entities) {
       if (deck.entities.hasOwnProperty(loopKey)) {
         const item = deck.entities[loopKey];

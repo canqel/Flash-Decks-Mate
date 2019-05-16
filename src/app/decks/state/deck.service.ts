@@ -11,7 +11,7 @@ export class DeckService {
   private deckStateHistory: StateHistoryPlugin;
 
   constructor(private deckStore: DeckStore, deckQuery: DeckQuery) {
-    this.deckStateHistory = new StateHistoryPlugin(deckQuery, { maxAge: 1 });
+    this.setup(deckQuery);
   }
 
   addCard(): void {
@@ -35,5 +35,13 @@ export class DeckService {
     if (this.deckStateHistory.hasPast === false) return;
 
     this.deckStateHistory.undo();
+  }
+
+  private setup(deckQuery: DeckQuery): void {
+    this.deckStateHistory = new StateHistoryPlugin(deckQuery, { maxAge: 1 });
+
+    const state = this.deckStore._value();
+    const maxId = Math.max(...<number[]>state.ids);
+    if (maxId != null) this.cardIdCache = maxId + 1;
   }
 }
