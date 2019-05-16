@@ -2,15 +2,26 @@
   <div class="row">
     <div class="col">
       <fdm-card-editor-input label="Word" [control]="word1Control">
-        <input matInput #firstInput formControlName="word1" [attr.tabindex]="baseTabIndex + 1">
+        <textarea matInput formControlName="word1" cdkTextareaAutosize
+                  cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8"
+                  [attr.tabindex]="baseTabIndex + 1" #firstInput>
+        </textarea>
       </fdm-card-editor-input>
 
-      <fdm-card-editor-input *ngIf="showExample" label="Example" [control]="example1Control">
-        <input matInput formControlName="example1" [attr.tabindex]="baseTabIndex + 3">
+      <fdm-card-editor-input *ngIf="showExample" label="Example"
+                             [control]="example1Control">
+        <textarea matInput formControlName="example1" cdkTextareaAutosize
+                  cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8"
+                  [attr.tabindex]="baseTabIndex + 3">
+        </textarea>
       </fdm-card-editor-input>
 
-      <fdm-card-editor-input *ngIf="showClarification" label="Clarification" [control]="clarification1Control">
-        <input matInput formControlName="clarification1" [attr.tabindex]="baseTabIndex + 5">
+      <fdm-card-editor-input *ngIf="showClarification" label="Clarification"
+                             [control]="clarification1Control">
+        <textarea matInput formControlName="clarification1" cdkTextareaAutosize
+                  cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8"
+                  [attr.tabindex]="baseTabIndex + 5">
+        </textarea>
       </fdm-card-editor-input>
     </div>
 
@@ -24,7 +35,8 @@
           <mat-icon>add</mat-icon>
           <span>Add example</span>
         </button>
-        <button mat-menu-item *ngIf="!showClarification" (click)="showClarification = true">
+        <button mat-menu-item *ngIf="!showClarification"
+                (click)="showClarification = true">
           <mat-icon>add</mat-icon>
           <span>Add clarification</span>
         </button>
@@ -33,15 +45,26 @@
 
     <div class="col">
       <fdm-card-editor-input label="Word" [control]="word2Control">
-        <input matInput formControlName="word2" [attr.tabindex]="baseTabIndex + 2">
+        <textarea matInput formControlName="word2" cdkTextareaAutosize
+                  cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8"
+                  [attr.tabindex]="baseTabIndex + 2">
+        </textarea>
       </fdm-card-editor-input>
 
-      <fdm-card-editor-input *ngIf="showExample" label="Example" [control]="example2Control">
-        <input matInput formControlName="example2" [attr.tabindex]="baseTabIndex + 4">
+      <fdm-card-editor-input *ngIf="showExample" label="Example"
+                             [control]="example2Control">
+        <textarea matInput formControlName="example2" cdkTextareaAutosize
+                  cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8"
+                  [attr.tabindex]="baseTabIndex + 4">
+        </textarea>
       </fdm-card-editor-input>
 
-      <fdm-card-editor-input *ngIf="showClarification" label="Clarification" [control]="clarification2Control">
-        <input matInput formControlName="clarification2" [attr.tabindex]="baseTabIndex + 6">
+      <fdm-card-editor-input *ngIf="showClarification" label="Clarification"
+                             [control]="clarification2Control">
+        <textarea matInput formControlName="clarification2" cdkTextareaAutosize
+                  cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8"
+                  [attr.tabindex]="baseTabIndex + 6">
+        </textarea>
       </fdm-card-editor-input>
     </div>
   </div>
