@@ -41,6 +41,8 @@ export class DeckService {
     this.deckStateHistory = new StateHistoryPlugin(deckQuery, { maxAge: 1 });
 
     const state = this.deckStore._value();
+    if (state.ids == null || state.ids.length === 0) return;
+
     const maxId = Math.max(...<number[]>state.ids);
     if (maxId != null) this.cardIdCache = maxId + 1;
   }
