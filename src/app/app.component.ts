@@ -5,7 +5,7 @@ import { ShortcutsService } from './core/services/shortcuts.service';
 @Component({
   selector: 'fdm-root',
   template: `
-    <div class="mat-display-1" style="text-align:center; margin:2rem 0 3rem 0;">
+    <div class="mat-display-1 app-header">
       Flash Decks Mate
     </div>
     <div class="page-container">
