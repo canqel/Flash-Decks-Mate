@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
-import { DeckExporterService } from '../../services/deck-exporter.service';
+import { AfterViewInit, Component, HostListener, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DeckExportDialogComponent } from '../../components/deck-export-dialog/deck-export-dialog.component';
-import { ShortcutsService, KeyboardShortcut } from 'src/app/core/services/shortcuts.service';
-import { DeckService } from '../../state/deck.service';
-import { DeckQuery } from '../../state/deck.query';
-import { FlashCard } from '../../state/decks.models';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { KeyboardShortcut, ShortcutsService } from 'src/app/core/services/shortcuts.service';
+import { DeckExportDialogComponent } from '../../components/deck-export-dialog/deck-export-dialog.component';
+import { DeckExporterService } from '../../services/deck-exporter.service';
+import { DeckQuery } from '../../state/deck.query';
+import { DeckService } from '../../state/deck.service';
+import { FlashCard } from '../../state/decks.models';
+import { Subject } from 'rxjs/internal/Subject';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: './deck-editor.component.html',
-  styleUrls: ['./deck-editor.component.scss']
+  styleUrls: ['./deck-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DeckEditorComponent {
+export class DeckEditorComponent implements AfterViewInit, OnDestroy {
+  stickyFooter = false;
+
   private readonly snackBarConfig: MatSnackBarConfig = {
     duration: 8 * 1000,
     horizontalPosition: 'left'
   };
+
+  private destroy = new Subject();
 
   constructor(public deckService: DeckService,
     public deckQuery: DeckQuery,
@@ -27,6 +34,24 @@ export class DeckEditorComponent {
 
     const addCardShortcut = new KeyboardShortcut('i', () => this.deckService.addCard(), true);
     shortcutsService.register(addCardShortcut);
+
+    deckQuery.selectCount()
+      .pipe(takeUntil(this.destroy))
+      .subscribe(() => this.updateFooterStickyState());
+  }
+
+  ngAfterViewInit(): void {
+    this.updateFooterStickyState();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  handleScroll(): void {
+    this.updateFooterStickyState();
   }
 
   export(): void {
@@ -49,6 +74,14 @@ export class DeckEditorComponent {
     snackBarRef.onAction().subscribe(() => {
       this.deckService.undo();
     });
+  }
+
+  private updateFooterStickyState(): void {
+    const currentWindowBottomEdgeY = window.pageYOffset + window.innerHeight;
+    const documentFullHeight = document.body.scrollHeight;
+    const footerBottomMargin = 32;
+
+    this.stickyFooter = (documentFullHeight - footerBottomMargin) > currentWindowBottomEdgeY;
   }
 
   private openExportDialog(output: string): void {

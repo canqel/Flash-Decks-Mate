@@ -27,10 +27,12 @@
     </div>
   </div>
 
-  <div class="deck-footer" *ngIf="cards.length > 0">
-    <div class="col">
-      <button mat-raised-button color="accent" (click)="export()">Export</button>
-      <div class="mat-small">{{ cards.length }} flash card(s)</div>
+  <div class="deck-footer-container">
+    <div class="deck-footer" [class.sticky]="stickyFooter" *ngIf="cards.length > 0">
+      <div class="col">
+        <button mat-raised-button color="accent" (click)="export()">Export</button>
+        <div class="mat-small">{{ cards.length }} flash card(s)</div>
+      </div>
     </div>
   </div>
 </div>

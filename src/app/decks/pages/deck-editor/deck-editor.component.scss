@@ -38,21 +38,37 @@
     }
   }
 
-  .deck-footer {
-    background-color: $primary-color-dark;
-    display: flex;
-    justify-content: center;
-    border-radius: 0 0 6px 6px;
-    padding: 1rem 0 0.75rem 0;
-    margin-top: 1px;
+  .deck-footer-container {
+    // NOTE: It needs to have the same height as the deck-footer.
+    // When deck-footer is sticked, deck-footer-container preserves 
+    // the space for the default position of deck-footer.
+    height: 92px;
     margin-bottom: 2rem;
 
-    .col {
+    .deck-footer {
+      background-color: $primary-color-dark;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      border-radius: 0 0 6px 6px;
+      padding: 1rem 0 0.75rem 0;
+      margin-top: 1px;
+      
+      &.sticky {
+        position: fixed;
+        bottom: 0;
+        z-index: 100;
+        box-shadow: 0 -2px 8px 0px rgba(0, 0, 0, 0.3);
+        width: 900px;
+        margin: 0;
+      }
 
-      .mat-small {
-        margin-top: 0.5rem;
+      .col {
+        display: flex;
+        flex-direction: column;
+
+        .mat-small {
+          margin-top: 0.5rem;
+        }
       }
     }
   }
