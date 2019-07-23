@@ -19,8 +19,8 @@ export class InputContextMenuComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
 
+  inputText: string;
   private subscriptions: Subscription;
-  private inputText: string;
 
   constructor(private dictionariesService: DictionariesService) { }
 

@@ -3,6 +3,9 @@
 
 <mat-menu #menu="matMenu" (closed)="handleMenuClosed()">
   <ng-template matMenuContent>
+    <div mat-menu-item [disabled]="true">
+      {{ inputText }}
+    </div>
     <button mat-menu-item (click)="openInDiki()">
       Look up in Diki.pl
     </button>

@@ -82,6 +82,24 @@ export class CardEditorInputComponent implements OnInit, OnDestroy {
   }
 
   private showContextMenu(): void {
-    this.openContextMenuRequests.next(this.fieldControl.value);
+    const selectedText = this.getInputSelectedText();
+    const textForContextMenu = selectedText.length > 0 ? selectedText : this.fieldControl.value;
+    this.openContextMenuRequests.next(textForContextMenu);
+  }
+
+  private getInputSelectedText(): string {
+    let text = '';
+    const activeEl: any = document.activeElement;
+    const activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null;
+
+    if (
+      (activeElTagName === 'textarea') || (activeElTagName === 'input' &&
+        /^(?:text|search|password|tel|url)$/i.test(activeEl.type)) &&
+      (typeof activeEl.selectionStart === 'number')
+    ) {
+      text = <any>activeEl.value.slice(activeEl.selectionStart, activeEl.selectionEnd);
+    }
+
+    return text;
   }
 }
