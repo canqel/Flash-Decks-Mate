@@ -13,6 +13,10 @@ export class DictionariesService {
     return this.generateUrl('https://translate.google.pl/#view=home&op=translate&sl=de&tl=pl&text=', phrase);
   }
 
+  generateUrlForDeepL(phrase: string): string {
+    return this.generateUrl('https://www.deepl.com/translator#de/pl/', phrase);
+  }
+
   private generateUrl(base: string, parameter: string): string {
     if (!parameter || parameter.length === 0) return null;
 

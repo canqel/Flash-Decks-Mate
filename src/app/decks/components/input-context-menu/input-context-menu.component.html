@@ -6,6 +6,12 @@
     <div mat-menu-item [disabled]="true">
       {{ inputText }}
     </div>
+    <button mat-menu-item (click)="openInGoogleAndDeepL()">
+      Look up in DeepL and Google Translate
+    </button>
+    <button mat-menu-item (click)="openInDeepL()">
+      Look up in DeepL
+    </button>
     <button mat-menu-item (click)="openInGoogleTranslate()">
       Look up in Google Translate
     </button>

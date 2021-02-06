@@ -42,6 +42,16 @@ export class InputContextMenuComponent implements OnInit, OnDestroy {
     this.open(url);
   }
 
+  openInDeepL(): void {
+    const url = this.dictionariesService.generateUrlForDeepL(this.inputText);
+    this.open(url);
+  }
+
+  openInGoogleAndDeepL(): void {
+    this.openInGoogleTranslate();
+    this.openInDeepL();
+  }
+
   handleMenuClosed(): void {
     this.closed.emit();
   }
