@@ -9,6 +9,7 @@ import { DeckService } from '../../state/deck.service';
 import { FlashCard } from '../../state/decks.models';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/operators';
+import { DeckImportDialogComponent } from '../../components/deck-import-dialog/deck-import-dialog.component';
 
 @Component({
   templateUrl: './deck-editor.component.html',
@@ -73,6 +74,12 @@ export class DeckEditorComponent implements AfterViewInit, OnDestroy {
     const snackBarRef = this.snackBar.open('The deck has been reseted.', 'Undo', this.snackBarConfig);
     snackBarRef.onAction().subscribe(() => {
       this.deckService.undo();
+    });
+  }
+
+  openImportDialog(): void {
+    this.dialog.open(DeckImportDialogComponent, {
+      width: '700px'
     });
   }
 

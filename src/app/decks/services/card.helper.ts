@@ -8,3 +8,16 @@ export function createCard(id: number, side1Lang?: Language, side2Lang?: Languag
     clarification: new FlashCardEntry(side1Lang, side2Lang)
   };
 }
+
+export function createCardWithWordEntry(id: number, wordEntry: FlashCardEntry): FlashCard {
+
+  const side1Lang = wordEntry.side1.lang;
+  const side2Lang = wordEntry.side2.lang;
+
+  return <FlashCard>{
+    id: id,
+    word: wordEntry,
+    example: new FlashCardEntry(side1Lang, side2Lang),
+    clarification: new FlashCardEntry(side1Lang, side2Lang)
+  };
+}

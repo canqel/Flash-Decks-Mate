@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FlashCard } from './decks.models';
+import { FlashCard, FlashCardEntry } from './decks.models';
 import { DeckStore } from './deck.store';
-import { createCard } from '../services/card.helper';
+import { createCard, createCardWithWordEntry } from '../services/card.helper';
 import { DeckQuery } from './deck.query';
 import { StateHistoryPlugin } from '@datorama/akita';
 
@@ -20,6 +20,12 @@ export class DeckService {
 
     this.deckStore.add(newCard, { prepend: true });
     this.deckStore.setActive(newCard.id);
+  }
+
+  addCards(entries: FlashCardEntry[]): void {
+    const cards = entries.map(entry => createCardWithWordEntry(this.cardIdCache++, entry));
+
+    this.deckStore.add(cards, { prepend: true });
   }
 
   updateCard(id: number, newState: FlashCard): void {
