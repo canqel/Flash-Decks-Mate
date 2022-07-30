@@ -25,7 +25,8 @@
   <div class="deck-body">
     <div class="card-editor-wrapper"
          *ngFor="let card of cards; let loopIndex=index; trackBy: trackByFn">
-      <fdm-card-editor [card]="card" [index]="loopIndex" (cardChanged)="update($event)">
+      <fdm-card-editor [card]="card" [index]="loopIndex" (cardChanged)="update($event)"
+                       (removeCardRequested)="deckService.removeCard(card.id)">
       </fdm-card-editor>
     </div>
   </div>

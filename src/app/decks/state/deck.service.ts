@@ -33,6 +33,10 @@ export class DeckService {
     this.deckStore.update(id, newState);
   }
 
+  removeCard(id: number): void {
+    this.deckStore.remove(id);
+  }
+
   reset(): void {
     this.deckStore.reset();
   }

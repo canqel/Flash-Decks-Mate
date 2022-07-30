@@ -35,10 +35,16 @@
           <mat-icon>add</mat-icon>
           <span>Add example</span>
         </button>
+
         <button mat-menu-item *ngIf="!showClarification"
                 (click)="showClarification = true">
           <mat-icon>add</mat-icon>
           <span>Add clarification</span>
+        </button>
+
+        <button mat-menu-item (click)="removeCard()">
+          <mat-icon>clear</mat-icon>
+          <span>Remove card</span>
         </button>
       </mat-menu>
     </div>

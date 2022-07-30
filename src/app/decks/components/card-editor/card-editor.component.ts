@@ -26,6 +26,7 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
   }
 
   @Output() cardChanged = new EventEmitter<FlashCard>();
+  @Output() removeCardRequested = new EventEmitter<void>();
 
   @ViewChild('firstInput') firstInputRef: ElementRef;
   isInEditMode = true;
@@ -58,6 +59,10 @@ export class CardEditorComponent implements OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();
+  }
+
+  removeCard(): void {
+    this.removeCardRequested.emit();
   }
 
   private init(card: FlashCard): void {
